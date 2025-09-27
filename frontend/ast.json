@@ -1,0 +1,12 @@
+{
+  "type" : "Program",
+  "statements" : [ {
+    "type" : "VarDecl",
+    "dataType" : "int",
+    "identifier" : "y",
+    "initialValue" : {
+      "type" : "IntLiteral",
+      "value" : 10
+    }
+  } ]
+}

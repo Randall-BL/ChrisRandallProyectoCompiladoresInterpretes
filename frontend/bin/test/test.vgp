@@ -1,0 +1,27 @@
+// Prueba básica de dibujo
+draw circle (100, 150, 50, #FF0000);
+draw rect (50, 50, 200, 200, #00FF00);
+draw line (0, 0, 300, 300, 2, #0000FF);
+
+// Prueba de frame y wait
+frame {
+    draw circle (200, 200, 30, #FFFF00);
+    wait 500 ms;
+}
+
+// Prueba de loop
+loop 3 times {
+    draw line (50, 50, 250, 250, 1, #FF00FF);
+}
+
+// Prueba de condicionales y variables
+if (x > 10) {
+    y = 20;
+    draw circle (y, y, 15, #FFFFFF);
+} else {
+    y = 10;
+}
+
+// Prueba de expresiones
+size = 40 + 2 * 5;
+draw rect (100, 100, 100+size, 100+size, #123456);
