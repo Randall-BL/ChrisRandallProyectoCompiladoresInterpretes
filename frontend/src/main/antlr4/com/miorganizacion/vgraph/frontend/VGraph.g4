@@ -4,19 +4,55 @@ grammar VGraph;
 start: statement* EOF;
 
 statement
-    : varDeclaration       # StmtVarDecl
-    | setcolorStmt         # StmtSetColor
-    | drawStmt             # StmtDraw
-    | frameStmt            # StmtFrame
-    | loopStmt             # StmtLoop
-    | ifStmt               # StmtIf
-    | waitStmt             # StmtWait
-    | assignment ';'       # StmtAssign
+    : varStmt         # StmtVar
+    | incStmt         # StmtInc
+    | turtleMoveStmt  # StmtTurtleMove
+    | turtleTurnStmt  # StmtTurtleTurn
+    | turtleStateStmt # StmtTurtleState
+    | turtlePosStmt   # StmtTurtlePos
+    | esperaStmt      # StmtEspera
     ;
 
-varDeclaration
-    : '(' type ')' ID ('=' expr)? ';'
+
+varStmt
+    : HAZ ID expr ';'          # StmtHaz
+    | INIC ID '=' expr ';'     # StmtInic
     ;
+
+incStmt
+    : INC '[' ID (expr)? ']' ';'
+    ;
+
+turtleMoveStmt
+    : AVANZA expr ';'    # MoveAvanza
+    | RETROCEDE expr ';' # MoveRetrocede
+    ;
+
+turtleTurnStmt // Comandos de giro
+    : GIRADERECHA expr ';'    # TurnRight
+    | GIRAIZQUIERDA expr ';'  # TurnLeft
+    ;
+
+turtleStateStmt // Comandos que cambian el estado de la tortuga
+    : OCULTATORTUGA ';'       # StateHide
+    | PONCOLORLAPIZ ID ';'    # StateSetColor // El color es un ID: 'rojo', 'azul', etc.
+    | BAJALAPIZ ';'           # StatePenDown
+    | SUBELAPIZ ';'           # StatePenUp
+    ;
+
+turtlePosStmt // Comandos que establecen la posición o dirección
+    : CENTRO ';'                           # PosCenter
+    | PONPOS '[' expr expr ']' ';'         # PosSetXYBrackets
+    | PONPOS expr expr ';'                 # PosSetXYNoBrackets
+    | PONRUMBO expr ';'                    # PosSetHeading
+    | PONX expr ';'                        # PosSetX
+    | PONY expr ';'                        # PosSetY
+    ;
+
+esperaStmt
+    : ESPERA expr ';'
+    ;
+
 type
     : INT_TYPE
     | COLOR_TYPE
@@ -41,16 +77,13 @@ assignment:   ID '=' expr;
 condition:    expr op=COMP_OP expr;
 
 expr
-    : '(' expr ')'                          # Parens
-    | 'cos' '(' expr ')'                    # Cos
-    | 'sin' '(' expr ')'                    # Sin
-    | left=expr op=('*'|'/') right=expr     # MulDiv
-    | left=expr op=('+'|'-') right=expr     # AddSub
-    | left=expr op='%' right=expr           # Mod
-    | ID                                    # Var
-    | INT                                   # IntLiteral
-    | FLOAT                                 # FloatLiteral
-    | COLOR_LITERAL                         # ColorLiteral
+    : '(' expr ')'                      # Parens
+    | RUMBO                             # ExprRumbo
+    | left=expr op=('*'|'/') right=expr # MulDiv
+    | left=expr op=('+'|'-') right=expr # AddSub
+    | left=expr op='%' right=expr       # Mod
+    | ID                                # Var
+    | INT                               # IntLiteral
     ;
 
 // --- Lexer Rules ---
@@ -70,6 +103,28 @@ PIXEL:       'pixel';
 COS:         'cos';
 SIN:         'sin';
 COMP_OP:     '==' | '!=' | '<=' | '>=' | '<' | '>';
+//Cosas antiguas arriba
+
+HAZ:       'Haz';
+INIC:      'inic';
+INC:       'inc';
+AVANZA:    'avanza' | 'av';
+RETROCEDE: 'retrocede' | 're';
+GIRADERECHA:   'giraderecha' | 'gd';
+GIRAIZQUIERDA: 'giraizquierda' | 'gi';
+OCULTATORTUGA: 'ocultatortuga' | 'ot';
+PONCOLORLAPIZ: 'poncolorlapiz' | 'poncl';
+CENTRO:        'centro';
+ESPERA:        'espera';
+PONPOS:        'ponpos' | 'ponxy';
+PONRUMBO:      'ponrumbo';
+RUMBO:         'rumbo'; // Este es especial, devuelve un valor
+PONX:          'ponx';
+PONY:          'pony';
+BAJALAPIZ:     'bajalapiz' | 'bl';
+SUBELAPIZ:     'subelapiz' | 'sb';
+
+
 
 COLOR_LITERAL
     : '#' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT

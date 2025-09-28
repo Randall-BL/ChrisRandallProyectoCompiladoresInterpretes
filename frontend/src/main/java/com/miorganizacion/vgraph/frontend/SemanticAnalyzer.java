@@ -24,16 +24,17 @@ public class SemanticAnalyzer {
 
     // Recorre el AST y declara cada VarDeclarationNode una sola vez
     private void collectDeclarations(ASTNode node) {
-        if (node instanceof VarDeclarationNode) {
-            VarDeclarationNode var = (VarDeclarationNode) node;
+        if (node instanceof HazNode) {
+            HazNode var = (HazNode) node;
             String id = var.getIdentifier();
-            SymbolTable.Type type = var.getDataType().equals("color")
-                ? SymbolTable.Type.COLOR
-                : SymbolTable.Type.NUMBER;
+
+            // El tipo se infiere, así que lo analizaremos después.
+            // Por ahora, solo declaramos el símbolo.
             if (table.isDeclared(id)) {
-                addError(var, "La variable '" + id + "' ya está declarada");
+                addError(var, "La variable '" + id + "' ya está declarada (solo se puede usar 'Haz' una vez por variable)");
             } else {
-                table.declare(id, type);
+                // Declaramos con un tipo provisional, la segunda pasada lo corregirá.
+                table.declare(id, SymbolTable.Type.UNKNOWN);
             }
         }
 
@@ -79,24 +80,30 @@ public class SemanticAnalyzer {
 
     // Despacha nodos para análisis semántico; ignora VarDeclarationNode
     private void visit(ASTNode node) {
-        if (node == null || node instanceof VarDeclarationNode) return;
+        if (node == null || node instanceof HazNode) return;
 
-        if (node instanceof SetColorNode) {
-            visitSetColor((SetColorNode) node);
-        } else if (node instanceof DrawCircleNode) {
-            visitDrawCircle((DrawCircleNode) node);
-        } else if (node instanceof DrawRectNode) {
-            visitDrawRect((DrawRectNode) node);
-        } else if (node instanceof DrawLineNode) {
-            visitDrawLine((DrawLineNode) node);
-        } else if (node instanceof PixelNode) {
-            visitDrawPixel((PixelNode) node);
-        } else if (node instanceof IfNode) {
-            visitIf((IfNode) node);
-        } else if (node instanceof LoopNode) {
-            visitLoop((LoopNode) node);
-        } else if (node instanceof FrameNode) {
-            visitFrame((FrameNode) node);
+        if (node instanceof IncrementNode) {
+            visitIncrement((IncrementNode) node);
+        } else if (node instanceof AvanzaNode) {
+            visitAvanza((AvanzaNode) node);
+        } else if (node instanceof RetrocedeNode) {
+            visitRetrocede((RetrocedeNode) node);
+        } else if (node instanceof GiraDerechaNode) {
+            visitGiraDerecha((GiraDerechaNode) node);
+        } else if (node instanceof GiraIzquierdaNode) {
+            visitGiraIzquierda((GiraIzquierdaNode) node);
+        } else if (node instanceof PonColorLapizNode) {
+            visitPonColorLapiz((PonColorLapizNode) node);
+        } else if (node instanceof PonPosNode) {
+            visitPonPos((PonPosNode) node);
+        } else if (node instanceof PonRumboNode) {
+            visitPonRumbo((PonRumboNode) node);
+        } else if (node instanceof PonXNode) {
+            visitPonX((PonXNode) node);
+        } else if (node instanceof PonYNode) {
+            visitPonY((PonYNode) node);
+        } else if (node instanceof EsperaNode) {
+            visitEspera((EsperaNode) node);
         } else if (node instanceof AssignmentNode) {
             visitAssignment((AssignmentNode) node);
         } else if (node instanceof FunctionCallNode) {
@@ -116,6 +123,9 @@ public class SemanticAnalyzer {
         else if (node instanceof FloatLiteralNode) {
             return SymbolTable.Type.NUMBER;           // <-- agregamos
         }
+        else if (node instanceof RumboNode) { // NUEVO
+            return SymbolTable.Type.NUMBER;
+        }
         else if (node instanceof ColorLiteralNode) {
             return SymbolTable.Type.COLOR;            // <-- agregamos
         }
@@ -130,92 +140,104 @@ public class SemanticAnalyzer {
     }
 
 
-    private void visitSetColor(SetColorNode node) {
-        visit(node.getColorExpr());
-        SymbolTable.Type type = inferType(node.getColorExpr());
-        if (type != SymbolTable.Type.COLOR) {
-            addError(node, "setcolor espera un color, se encontró: " + type);
+
+    // NUEVOS MÉTODOS
+    private void visitIncrement(IncrementNode node) {
+        String id = node.getIdentifier();
+        if (!table.isDeclared(id)) {
+            addError(node, "Variable no declarada: '" + id + "'");
+            return;
+        }
+        if (table.getType(id) != SymbolTable.Type.NUMBER) {
+            addError(node, "El comando 'inc' solo se puede usar con variables numéricas.");
+        }
+        if (node.getByValue() != null) {
+            visit(node.getByValue());
+            if (inferType(node.getByValue()) != SymbolTable.Type.NUMBER) {
+                addError(node, "El valor de incremento debe ser numérico.");
+            }
         }
     }
 
-    private void visitDrawCircle(DrawCircleNode node) {
-        visit(node.getCx());
-        visit(node.getCy());
-        visit(node.getRadius());
-        checkCoordinate(node, node.getCx(), "Coordenada X", 0, 639);
-        checkCoordinate(node, node.getCy(), "Coordenada Y", 0, 479);
-        checkPositive(node, node.getRadius(), "Radio");
-    }
-
-    private void visitDrawRect(DrawRectNode node) {
-        visit(node.getX1());
-        visit(node.getY1());
-        visit(node.getX2());
-        visit(node.getY2());
-        checkCoordinate(node, node.getX1(), "Coordenada X1", 0, 639);
-        checkCoordinate(node, node.getY1(), "Coordenada Y1", 0, 479);
-        checkCoordinate(node, node.getX2(), "Coordenada X2", 0, 639);
-        checkCoordinate(node, node.getY2(), "Coordenada Y2", 0, 479);
-    }
-
-    private void visitDrawLine(DrawLineNode node) {
-        visit(node.getX1());
-        visit(node.getY1());
-        visit(node.getX2());
-        visit(node.getY2());
-        checkCoordinate(node, node.getX1(), "Coordenada X1", 0, 639);
-        checkCoordinate(node, node.getY1(), "Coordenada Y1", 0, 479);
-        checkCoordinate(node, node.getX2(), "Coordenada X2", 0, 639);
-        checkCoordinate(node, node.getY2(), "Coordenada Y2", 0, 479);
-    }
-
-    private void visitDrawPixel(PixelNode node) {
-        visit(node.getX());
-        visit(node.getY());
-        checkCoordinate(node, node.getX(), "Coordenada X", 0, 639);
-        checkCoordinate(node, node.getY(), "Coordenada Y", 0, 479);
-    }
-
-    private void visitIf(IfNode node) {
-        visit(node.getCondition());
-        
-        // Corregido: Acceder al contenido del BlockNode
-        BlockNode thenBlock = (BlockNode) node.getThenBlock();
-        visitBlock(thenBlock);
-        
-        if (node.getElseBlock() != null) {
-            BlockNode elseBlock = (BlockNode) node.getElseBlock();
-            visitBlock(elseBlock);
+    private void visitAvanza(AvanzaNode node) {
+        visit(node.getDistance());
+        if (inferType(node.getDistance()) != SymbolTable.Type.NUMBER) {
+            addError(node, "El comando 'avanza' espera una distancia numérica.");
         }
     }
 
-    private void visitLoop(LoopNode node) {
-        visit(node.getInitialization());
-        visit(node.getCondition());
-        visit(node.getUpdate());
-        for (ASTNode stmt : node.getBody()) {
-            visit(stmt);
+    private void visitRetrocede(RetrocedeNode node) {
+        visit(node.getDistance());
+        if (inferType(node.getDistance()) != SymbolTable.Type.NUMBER) {
+            addError(node, "El comando 'retrocede' espera una distancia numérica.");
         }
     }
 
-    private void visitFrame(FrameNode node) {
-        for (ASTNode stmt : node.getStatements()) {
-            visit(stmt);
+    private void checkIsNumber(ASTNode node, String commandName) {
+        visit(node); // Analiza la expresión recursivamente
+        if (inferType(node) != SymbolTable.Type.NUMBER) {
+            addError(node, "El comando '" + commandName + "' espera un valor numérico.");
         }
+    }
+
+    private void visitGiraDerecha(GiraDerechaNode node) {
+        checkIsNumber(node.getAngle(), "giraderecha");
+    }
+
+    private void visitGiraIzquierda(GiraIzquierdaNode node) {
+        checkIsNumber(node.getAngle(), "giraizquierda");
+    }
+
+    private void visitPonColorLapiz(PonColorLapizNode node) {
+        String color = node.getColorName().toLowerCase();
+
+        if (!color.equals("negro") && !color.equals("azul") && !color.equals("rojo")) {
+            addError(node, "Color no válido: '" + node.getColorName() + "'. Los colores permitidos son Negro, Azul, Rojo.");
+        }
+    }
+
+    private void visitPonPos(PonPosNode node) {
+        checkIsNumber(node.getX(), "ponpos (coordenada X)");
+        checkIsNumber(node.getY(), "ponpos (coordenada Y)");
+    }
+
+    private void visitPonRumbo(PonRumboNode node) {
+        checkIsNumber(node.getValue(), "ponrumbo");
+    }
+
+    private void visitPonX(PonXNode node) {
+        checkIsNumber(node.getValue(), "ponx");
+    }
+
+    private void visitPonY(PonYNode node) {
+        checkIsNumber(node.getValue(), "pony");
+    }
+
+    private void visitEspera(EsperaNode node) {
+        checkIsNumber(node.getDuration(), "espera");
     }
 
     // 2) En visitAssignment, ahora dará COLOR para c = rojo/azul/verde:
     private void visitAssignment(AssignmentNode node) {
         visit(node.getExpression());
-        SymbolTable.Type varType  = table.getType(node.getIdentifier());
+        String id = node.getIdentifier();
         SymbolTable.Type exprType = inferType(node.getExpression());
+
+        if (!table.isDeclared(id)) {
+            addError(node, "Variable no declarada: '" + id + "'. Debes usar 'Haz' para crearla primero.");
+            return;
+        }
+
+        SymbolTable.Type varType = table.getType(id);
+
+        // Si la variable fue declarada con 'Haz' pero aún no tiene tipo, se lo asignamos ahora.
         if (varType == SymbolTable.Type.UNKNOWN) {
-            addError(node, "Variable no declarada: '" + node.getIdentifier() + "'");
-        } 
-        else if (varType != exprType) {
-            addError(node,
-                "Asignación de tipo incompatible para '" + node.getIdentifier()
-                + "'. Esperado: " + varType + ", Encontrado: " + exprType);
+            table.declare(id, exprType); // Asigna el tipo en la primera asignación.
+            varType = exprType;
+        }
+
+        if (varType != exprType) {
+            addError(node, "Asignación de tipo incompatible para '" + id + "'. Esperado: " + varType + ", Encontrado: " + exprType);
         }
     }
 

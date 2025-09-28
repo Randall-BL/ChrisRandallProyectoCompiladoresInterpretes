@@ -1,33 +1,52 @@
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\AssignmentNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\ASTNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\BinaryOpNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\BlockNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\ColorLiteralNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\ConditionNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\DrawCircleNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\DrawLineNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\DrawRectNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\FloatLiteralNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\FrameNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\FunctionCallNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\IfNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\IntLiteralNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\LoopNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\PixelNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\ProgramNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\SetColorNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\VarDeclarationNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\VarReferenceNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\WaitNode.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\Main.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\SemanticAnalyzer.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\SymbolTable.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ThrowingErrorListener.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\VGraphASTBuilder.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\src\main\java\com\miorganizacion\vgraph\frontend\VGraphCustomVisitor.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\target\generated-sources\antlr4\com\miorganizacion\vgraph\frontend\VGraphBaseListener.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\target\generated-sources\antlr4\com\miorganizacion\vgraph\frontend\VGraphBaseVisitor.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\target\generated-sources\antlr4\com\miorganizacion\vgraph\frontend\VGraphLexer.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\target\generated-sources\antlr4\com\miorganizacion\vgraph\frontend\VGraphListener.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\target\generated-sources\antlr4\com\miorganizacion\vgraph\frontend\VGraphParser.java
-C:\Users\YITAN\OneDrive\Escritorio\Compi-IS2025\Compi-IS2025\Proyecto_CompInterp-development\Proyecto_CompInterp-development\Frontend\antlr\frontend\target\generated-sources\antlr4\com\miorganizacion\vgraph\frontend\VGraphVisitor.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\AssignmentNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\ASTNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\AvanzaNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\BajaLapizNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\BinaryOpNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\BlockNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\CentroNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\ColorLiteralNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\ConditionNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\DrawCircleNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\DrawLineNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\DrawRectNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\EsperaNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\FloatLiteralNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\FrameNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\FunctionCallNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\GiraDerechaNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\GiraIzquierdaNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\HazNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\IfNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\IncrementNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\IntLiteralNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\LoopNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\OcultaTortugaNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\PixelNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\PonColorLapizNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\PonPosNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\PonRumboNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\PonXNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\PonYNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\ProgramNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\RetrocedeNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\RumboNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\SetColorNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\SubeLapizNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\VarDeclarationNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\VarReferenceNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ast\WaitNode.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\frontend\IDE\IDE.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\frontend\IDE\SyntaxHighlighter.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\Main.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\SemanticAnalyzer.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\SymbolTable.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\ThrowingErrorListener.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\VGraphASTBuilder.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\src\main\java\com\miorganizacion\vgraph\frontend\VGraphCustomVisitor.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\target\generated-sources\antlr4\com\miorganizacion\vgraph\frontend\VGraphBaseListener.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\target\generated-sources\antlr4\com\miorganizacion\vgraph\frontend\VGraphBaseVisitor.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\target\generated-sources\antlr4\com\miorganizacion\vgraph\frontend\VGraphLexer.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\target\generated-sources\antlr4\com\miorganizacion\vgraph\frontend\VGraphListener.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\target\generated-sources\antlr4\com\miorganizacion\vgraph\frontend\VGraphParser.java
+E:\tec\2025\iisem\Compiladores E Interpetres\Proyecto\ChrisRandallProyectoCompiladoresInterpretes\frontend\target\generated-sources\antlr4\com\miorganizacion\vgraph\frontend\VGraphVisitor.java

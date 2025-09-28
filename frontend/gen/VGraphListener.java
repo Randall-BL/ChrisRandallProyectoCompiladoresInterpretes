@@ -1,4 +1,4 @@
-// Generated from C:/Users/YITAN/OneDrive/Escritorio/Compi-IS2025/Compi-IS2025/Proyecto_CompInterp-development/Proyecto_CompInterp-development/Frontend/antlr/frontend/src/main/antlr4/com/miorganizacion/vgraph/frontend/VGraph.g4 by ANTLR 4.13.2
+// Generated from E:/tec/2025/iisem/Compiladores E Interpetres/Proyecto/ChrisRandallProyectoCompiladoresInterpretes/frontend/src/main/antlr4/com/miorganizacion/vgraph/frontend/VGraph.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -17,111 +17,301 @@ public interface VGraphListener extends ParseTreeListener {
 	 */
 	void exitStart(VGraphParser.StartContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code StmtVarDecl}
+	 * Enter a parse tree produced by the {@code StmtVar}
 	 * labeled alternative in {@link VGraphParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterStmtVarDecl(VGraphParser.StmtVarDeclContext ctx);
+	void enterStmtVar(VGraphParser.StmtVarContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code StmtVarDecl}
+	 * Exit a parse tree produced by the {@code StmtVar}
 	 * labeled alternative in {@link VGraphParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitStmtVarDecl(VGraphParser.StmtVarDeclContext ctx);
+	void exitStmtVar(VGraphParser.StmtVarContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code StmtSetColor}
+	 * Enter a parse tree produced by the {@code StmtInc}
 	 * labeled alternative in {@link VGraphParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterStmtSetColor(VGraphParser.StmtSetColorContext ctx);
+	void enterStmtInc(VGraphParser.StmtIncContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code StmtSetColor}
+	 * Exit a parse tree produced by the {@code StmtInc}
 	 * labeled alternative in {@link VGraphParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitStmtSetColor(VGraphParser.StmtSetColorContext ctx);
+	void exitStmtInc(VGraphParser.StmtIncContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code StmtDraw}
+	 * Enter a parse tree produced by the {@code StmtTurtleMove}
 	 * labeled alternative in {@link VGraphParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterStmtDraw(VGraphParser.StmtDrawContext ctx);
+	void enterStmtTurtleMove(VGraphParser.StmtTurtleMoveContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code StmtDraw}
+	 * Exit a parse tree produced by the {@code StmtTurtleMove}
 	 * labeled alternative in {@link VGraphParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitStmtDraw(VGraphParser.StmtDrawContext ctx);
+	void exitStmtTurtleMove(VGraphParser.StmtTurtleMoveContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code StmtFrame}
+	 * Enter a parse tree produced by the {@code StmtTurtleTurn}
 	 * labeled alternative in {@link VGraphParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterStmtFrame(VGraphParser.StmtFrameContext ctx);
+	void enterStmtTurtleTurn(VGraphParser.StmtTurtleTurnContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code StmtFrame}
+	 * Exit a parse tree produced by the {@code StmtTurtleTurn}
 	 * labeled alternative in {@link VGraphParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitStmtFrame(VGraphParser.StmtFrameContext ctx);
+	void exitStmtTurtleTurn(VGraphParser.StmtTurtleTurnContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code StmtLoop}
+	 * Enter a parse tree produced by the {@code StmtTurtleState}
 	 * labeled alternative in {@link VGraphParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterStmtLoop(VGraphParser.StmtLoopContext ctx);
+	void enterStmtTurtleState(VGraphParser.StmtTurtleStateContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code StmtLoop}
+	 * Exit a parse tree produced by the {@code StmtTurtleState}
 	 * labeled alternative in {@link VGraphParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitStmtLoop(VGraphParser.StmtLoopContext ctx);
+	void exitStmtTurtleState(VGraphParser.StmtTurtleStateContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code StmtIf}
+	 * Enter a parse tree produced by the {@code StmtTurtlePos}
 	 * labeled alternative in {@link VGraphParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterStmtIf(VGraphParser.StmtIfContext ctx);
+	void enterStmtTurtlePos(VGraphParser.StmtTurtlePosContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code StmtIf}
+	 * Exit a parse tree produced by the {@code StmtTurtlePos}
 	 * labeled alternative in {@link VGraphParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitStmtIf(VGraphParser.StmtIfContext ctx);
+	void exitStmtTurtlePos(VGraphParser.StmtTurtlePosContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code StmtWait}
+	 * Enter a parse tree produced by the {@code StmtEspera}
 	 * labeled alternative in {@link VGraphParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterStmtWait(VGraphParser.StmtWaitContext ctx);
+	void enterStmtEspera(VGraphParser.StmtEsperaContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code StmtWait}
+	 * Exit a parse tree produced by the {@code StmtEspera}
 	 * labeled alternative in {@link VGraphParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitStmtWait(VGraphParser.StmtWaitContext ctx);
+	void exitStmtEspera(VGraphParser.StmtEsperaContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code StmtAssign}
-	 * labeled alternative in {@link VGraphParser#statement}.
+	 * Enter a parse tree produced by the {@code StmtHaz}
+	 * labeled alternative in {@link VGraphParser#varStmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterStmtAssign(VGraphParser.StmtAssignContext ctx);
+	void enterStmtHaz(VGraphParser.StmtHazContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code StmtAssign}
-	 * labeled alternative in {@link VGraphParser#statement}.
+	 * Exit a parse tree produced by the {@code StmtHaz}
+	 * labeled alternative in {@link VGraphParser#varStmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitStmtAssign(VGraphParser.StmtAssignContext ctx);
+	void exitStmtHaz(VGraphParser.StmtHazContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link VGraphParser#varDeclaration}.
+	 * Enter a parse tree produced by the {@code StmtInic}
+	 * labeled alternative in {@link VGraphParser#varStmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterVarDeclaration(VGraphParser.VarDeclarationContext ctx);
+	void enterStmtInic(VGraphParser.StmtInicContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link VGraphParser#varDeclaration}.
+	 * Exit a parse tree produced by the {@code StmtInic}
+	 * labeled alternative in {@link VGraphParser#varStmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitVarDeclaration(VGraphParser.VarDeclarationContext ctx);
+	void exitStmtInic(VGraphParser.StmtInicContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link VGraphParser#incStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterIncStmt(VGraphParser.IncStmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link VGraphParser#incStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitIncStmt(VGraphParser.IncStmtContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code MoveAvanza}
+	 * labeled alternative in {@link VGraphParser#turtleMoveStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterMoveAvanza(VGraphParser.MoveAvanzaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code MoveAvanza}
+	 * labeled alternative in {@link VGraphParser#turtleMoveStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitMoveAvanza(VGraphParser.MoveAvanzaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code MoveRetrocede}
+	 * labeled alternative in {@link VGraphParser#turtleMoveStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterMoveRetrocede(VGraphParser.MoveRetrocedeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code MoveRetrocede}
+	 * labeled alternative in {@link VGraphParser#turtleMoveStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitMoveRetrocede(VGraphParser.MoveRetrocedeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code TurnRight}
+	 * labeled alternative in {@link VGraphParser#turtleTurnStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterTurnRight(VGraphParser.TurnRightContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code TurnRight}
+	 * labeled alternative in {@link VGraphParser#turtleTurnStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitTurnRight(VGraphParser.TurnRightContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code TurnLeft}
+	 * labeled alternative in {@link VGraphParser#turtleTurnStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterTurnLeft(VGraphParser.TurnLeftContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code TurnLeft}
+	 * labeled alternative in {@link VGraphParser#turtleTurnStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitTurnLeft(VGraphParser.TurnLeftContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code StateHide}
+	 * labeled alternative in {@link VGraphParser#turtleStateStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterStateHide(VGraphParser.StateHideContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code StateHide}
+	 * labeled alternative in {@link VGraphParser#turtleStateStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitStateHide(VGraphParser.StateHideContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code StateSetColor}
+	 * labeled alternative in {@link VGraphParser#turtleStateStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterStateSetColor(VGraphParser.StateSetColorContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code StateSetColor}
+	 * labeled alternative in {@link VGraphParser#turtleStateStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitStateSetColor(VGraphParser.StateSetColorContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code StatePenDown}
+	 * labeled alternative in {@link VGraphParser#turtleStateStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatePenDown(VGraphParser.StatePenDownContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code StatePenDown}
+	 * labeled alternative in {@link VGraphParser#turtleStateStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatePenDown(VGraphParser.StatePenDownContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code StatePenUp}
+	 * labeled alternative in {@link VGraphParser#turtleStateStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatePenUp(VGraphParser.StatePenUpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code StatePenUp}
+	 * labeled alternative in {@link VGraphParser#turtleStateStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatePenUp(VGraphParser.StatePenUpContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PosCenter}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterPosCenter(VGraphParser.PosCenterContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PosCenter}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitPosCenter(VGraphParser.PosCenterContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PosSetXYBrackets}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterPosSetXYBrackets(VGraphParser.PosSetXYBracketsContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PosSetXYBrackets}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitPosSetXYBrackets(VGraphParser.PosSetXYBracketsContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PosSetXYNoBrackets}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterPosSetXYNoBrackets(VGraphParser.PosSetXYNoBracketsContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PosSetXYNoBrackets}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitPosSetXYNoBrackets(VGraphParser.PosSetXYNoBracketsContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PosSetHeading}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterPosSetHeading(VGraphParser.PosSetHeadingContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PosSetHeading}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitPosSetHeading(VGraphParser.PosSetHeadingContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PosSetX}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterPosSetX(VGraphParser.PosSetXContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PosSetX}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitPosSetX(VGraphParser.PosSetXContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PosSetY}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterPosSetY(VGraphParser.PosSetYContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PosSetY}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitPosSetY(VGraphParser.PosSetYContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link VGraphParser#esperaStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterEsperaStmt(VGraphParser.EsperaStmtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link VGraphParser#esperaStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitEsperaStmt(VGraphParser.EsperaStmtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link VGraphParser#type}.
 	 * @param ctx the parse tree
@@ -251,18 +441,6 @@ public interface VGraphListener extends ParseTreeListener {
 	 */
 	void exitCondition(VGraphParser.ConditionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ColorLiteral}
-	 * labeled alternative in {@link VGraphParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterColorLiteral(VGraphParser.ColorLiteralContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ColorLiteral}
-	 * labeled alternative in {@link VGraphParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitColorLiteral(VGraphParser.ColorLiteralContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code Mod}
 	 * labeled alternative in {@link VGraphParser#expr}.
 	 * @param ctx the parse tree
@@ -311,18 +489,6 @@ public interface VGraphListener extends ParseTreeListener {
 	 */
 	void exitParens(VGraphParser.ParensContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Cos}
-	 * labeled alternative in {@link VGraphParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterCos(VGraphParser.CosContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code Cos}
-	 * labeled alternative in {@link VGraphParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitCos(VGraphParser.CosContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code Var}
 	 * labeled alternative in {@link VGraphParser#expr}.
 	 * @param ctx the parse tree
@@ -335,29 +501,17 @@ public interface VGraphListener extends ParseTreeListener {
 	 */
 	void exitVar(VGraphParser.VarContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code FloatLiteral}
+	 * Enter a parse tree produced by the {@code ExprRumbo}
 	 * labeled alternative in {@link VGraphParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterFloatLiteral(VGraphParser.FloatLiteralContext ctx);
+	void enterExprRumbo(VGraphParser.ExprRumboContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code FloatLiteral}
+	 * Exit a parse tree produced by the {@code ExprRumbo}
 	 * labeled alternative in {@link VGraphParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitFloatLiteral(VGraphParser.FloatLiteralContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code Sin}
-	 * labeled alternative in {@link VGraphParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterSin(VGraphParser.SinContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code Sin}
-	 * labeled alternative in {@link VGraphParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitSin(VGraphParser.SinContext ctx);
+	void exitExprRumbo(VGraphParser.ExprRumboContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code IntLiteral}
 	 * labeled alternative in {@link VGraphParser#expr}.

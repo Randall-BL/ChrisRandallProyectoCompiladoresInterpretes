@@ -1,3 +1,11 @@
-(int) y= 10;
 
+Haz miVar 10;
+inic miVar = 50 + 5;
 
+avanza miVar;
+gd 90; 
+
+inc [miVar];       
+inc [miVar 100];  
+
+re 20; 
