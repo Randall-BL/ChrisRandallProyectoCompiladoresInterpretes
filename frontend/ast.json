@@ -1,12 +1,96 @@
 {
   "type" : "Program",
   "statements" : [ {
-    "type" : "VarDecl",
-    "dataType" : "int",
-    "identifier" : "y",
-    "initialValue" : {
-      "type" : "IntLiteral",
-      "value" : 10
-    }
+    "type" : "Haz",
+    "identifier" : "resultado1",
+    "expression" : {
+      "type" : "Producto",
+      "operandos" : [ {
+        "type" : "IntLiteral",
+        "value" : 2
+      }, {
+        "type" : "IntLiteral",
+        "value" : 3
+      }, {
+        "type" : "IntLiteral",
+        "value" : 4
+      } ]
+    },
+    "line" : 1,
+    "column" : 0
+  }, {
+    "type" : "Haz",
+    "identifier" : "total",
+    "expression" : {
+      "type" : "Suma",
+      "operandos" : [ {
+        "type" : "IntLiteral",
+        "value" : 10
+      }, {
+        "type" : "IntLiteral",
+        "value" : 20
+      }, {
+        "type" : "IntLiteral",
+        "value" : 30
+      }, {
+        "type" : "IntLiteral",
+        "value" : 40
+      } ]
+    },
+    "line" : 3,
+    "column" : 0
+  }, {
+    "type" : "Haz",
+    "identifier" : "cuadrado",
+    "expression" : {
+      "type" : "Potencia",
+      "base" : {
+        "type" : "IntLiteral",
+        "value" : 5
+      },
+      "exponente" : {
+        "type" : "IntLiteral",
+        "value" : 2
+      }
+    },
+    "line" : 5,
+    "column" : 0
+  }, {
+    "type" : "Haz",
+    "identifier" : "cociente",
+    "expression" : {
+      "type" : "Division",
+      "dividendo" : {
+        "type" : "IntLiteral",
+        "value" : 20
+      },
+      "divisor" : {
+        "type" : "IntLiteral",
+        "value" : 4
+      }
+    },
+    "line" : 7,
+    "column" : 0
+  }, {
+    "type" : "Haz",
+    "identifier" : "calculo",
+    "expression" : {
+      "type" : "Producto",
+      "operandos" : [ {
+        "type" : "Suma",
+        "operandos" : [ {
+          "type" : "IntLiteral",
+          "value" : 2
+        }, {
+          "type" : "IntLiteral",
+          "value" : 3
+        } ]
+      }, {
+        "type" : "IntLiteral",
+        "value" : 4
+      } ]
+    },
+    "line" : 9,
+    "column" : 0
   } ]
 }
