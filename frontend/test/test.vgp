@@ -1,3 +1,25 @@
-(int) y= 10;
+Ejecuta [avanza 50, giraderecha 90];
 
+repite 4 [avanza 30, giraderecha 90];
 
+Haz x  10;
+SI (x == 10) [avanza 20];
+
+Haz y  5;
+SI (y > 10) [giraderecha 45] [giraizquierda 45];
+
+Haz numero  0;
+Haz var1  0;
+Haz bucle  0;
+
+HAZ.HASTA [
+    SI (numero = 3) [avanza 10],
+    SI (var1 = 5) [retrocede 20],
+    inc [bucle 1]
+] (bucle = 1);
+
+iguales? 10 2*5;
+mayorque? 10 5;
+menorque? 3 10;
+Diferencia 100 30 20;
+azar 360;

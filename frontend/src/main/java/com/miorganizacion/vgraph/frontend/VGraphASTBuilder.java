@@ -24,179 +24,53 @@ public class VGraphASTBuilder extends VGraphBaseVisitor<ASTNode> {
     }
 
     @Override
-    public ASTNode visitStmtVarDecl(VGraphParser.StmtVarDeclContext ctx) {
-        return visit(ctx.varDeclaration());
+    public ASTNode visitStmtVar(VGraphParser.StmtVarContext ctx) {
+        return visit(ctx.varStmt());
     }
 
     @Override
-    public ASTNode visitStmtSetColor(VGraphParser.StmtSetColorContext ctx) {
-        return visit(ctx.setcolorStmt());
+    public ASTNode visitStmtInc(VGraphParser.StmtIncContext ctx) {
+        return visit(ctx.incStmt());
     }
 
     @Override
-    public ASTNode visitStmtDraw(VGraphParser.StmtDrawContext ctx) {
-        return visit(ctx.drawStmt());
+    public ASTNode visitStmtTurtleMove(VGraphParser.StmtTurtleMoveContext ctx) {
+        return visit(ctx.turtleMoveStmt());
     }
 
     @Override
-    public ASTNode visitStmtFrame(VGraphParser.StmtFrameContext ctx) {
-        return visit(ctx.frameStmt());
-    }
-
-    @Override
-    public ASTNode visitStmtLoop(VGraphParser.StmtLoopContext ctx) {
-        return visit(ctx.loopStmt());
-    }
-
-    @Override
-    public ASTNode visitStmtIf(VGraphParser.StmtIfContext ctx) {
-        return visit(ctx.ifStmt());
-    }
-
-    @Override
-    public ASTNode visitStmtWait(VGraphParser.StmtWaitContext ctx) {
-        return visit(ctx.waitStmt());
-    }
-
-    @Override
-    public ASTNode visitStmtAssign(VGraphParser.StmtAssignContext ctx) {
-        return visit(ctx.assignment());
-    }
-
-    @Override
-    public ASTNode visitVarDeclaration(VGraphParser.VarDeclarationContext ctx) {
-        ASTNode init = ctx.expr() != null ? visit(ctx.expr()) : null;
-        VarDeclarationNode node = new VarDeclarationNode(
-            ctx.type().getText(),
-            ctx.ID().getText(),
-            init
-        );
+    public ASTNode visitStmtHaz(VGraphParser.StmtHazContext ctx) {
+        HazNode node = new HazNode(ctx.ID().getText(), visit(ctx.expr()));
         setLocation(node, ctx);
         return node;
     }
 
     @Override
-    public ASTNode visitSetcolorStmt(VGraphParser.SetcolorStmtContext ctx) {
-        SetColorNode node = new SetColorNode(visit(ctx.expr()));
+    public ASTNode visitStmtInic(VGraphParser.StmtInicContext ctx) {
+        // Reutilizamos AssignmentNode para 'inic', ya que es funcionalmente una asignación
+        AssignmentNode node = new AssignmentNode(ctx.ID().getText(), visit(ctx.expr()));
         setLocation(node, ctx);
         return node;
     }
 
     @Override
-    public ASTNode visitDrawLine(VGraphParser.DrawLineContext ctx) {
-        DrawLineNode node = new DrawLineNode(
-            visit(ctx.expr(0)),
-            visit(ctx.expr(1)),
-            visit(ctx.expr(2)),
-            visit(ctx.expr(3))
-        );
+    public ASTNode visitIncStmt(VGraphParser.IncStmtContext ctx) {
+        ASTNode byValue = ctx.expr() != null ? visit(ctx.expr()) : null;
+        IncrementNode node = new IncrementNode(ctx.ID().getText(), byValue);
         setLocation(node, ctx);
         return node;
     }
 
     @Override
-    public ASTNode visitDrawRect(VGraphParser.DrawRectContext ctx) {
-        DrawRectNode node = new DrawRectNode(
-            visit(ctx.expr(0)),
-            visit(ctx.expr(1)),
-            visit(ctx.expr(2)),
-            visit(ctx.expr(3))
-        );
+    public ASTNode visitMoveAvanza(VGraphParser.MoveAvanzaContext ctx) {
+        AvanzaNode node = new AvanzaNode(visit(ctx.expr()));
         setLocation(node, ctx);
         return node;
     }
 
     @Override
-    public ASTNode visitDrawCircle(VGraphParser.DrawCircleContext ctx) {
-        DrawCircleNode node = new DrawCircleNode(
-            visit(ctx.expr(0)),
-            visit(ctx.expr(1)),
-            visit(ctx.expr(2))
-        );
-        setLocation(node, ctx);
-        return node;
-    }
-
-    @Override
-    public ASTNode visitDrawPixel(VGraphParser.DrawPixelContext ctx) {
-        PixelNode node = new PixelNode(
-            visit(ctx.expr(0)),
-            visit(ctx.expr(1))
-        );
-        setLocation(node, ctx);
-        return node;
-    }
-
-    @Override
-    public ASTNode visitFrameStmt(VGraphParser.FrameStmtContext ctx) {
-        FrameNode node = new FrameNode();
-        addStatements(ctx.statement(), node::addStatement);
-        setLocation(node, ctx);
-        return node;
-    }
-
-    @Override
-    public ASTNode visitLoopStmt(VGraphParser.LoopStmtContext ctx) {
-        LoopNode loop = new LoopNode();
-        ASTNode init   = visit(ctx.init);
-        ASTNode cond   = visitCondition(ctx.cond);
-        ASTNode update = visit(ctx.update);
-        loop.setInitialization(init);
-        loop.setCondition(cond);
-        loop.setUpdate(update);
-        setLocation(init,   ctx.init);
-        setLocation(cond,   ctx.cond);
-        setLocation(update, ctx.update);
-
-        addStatements(ctx.statement(), loop::addStatement);
-        setLocation(loop, ctx);
-        return loop;
-    }
-    
-    @Override
-    public ASTNode visitWaitStmt(VGraphParser.WaitStmtContext ctx) {
-        ASTNode duration = visit(ctx.expr());
-        WaitNode node = new WaitNode(duration);
-        setLocation(node, ctx);
-        return node;
-    }
-
-    @Override
-    public ASTNode visitIfStmt(VGraphParser.IfStmtContext ctx) {
-        // Crear nodos THEN y ELSE como BlockNode locales
-        ConditionNode condNode = visitCondition(ctx.cond);
-        BlockNode thenBlock = new BlockNode();
-        BlockNode elseBlock = ctx.getToken(VGraphParser.ELSE, 0) != null ? new BlockNode() : null;
-
-        // Construir el IfNode con bloques concretos
-        IfNode ifNode = new IfNode(condNode, thenBlock, elseBlock);
-
-        // Distribuir statements en thenBlock/elseBlock
-        int total = ctx.statement().size();
-        int split = elseBlock != null ? total / 2 : total;
-        for (int i = 0; i < split; i++) {
-            ASTNode stmt = visit(ctx.statement(i));
-            thenBlock.addStatement(stmt);
-            setLocation(stmt, ctx.statement(i));
-        }
-        if (elseBlock != null) {
-            for (int i = split; i < total; i++) {
-                ASTNode stmt = visit(ctx.statement(i));
-                elseBlock.addStatement(stmt);
-                setLocation(stmt, ctx.statement(i));
-            }
-        }
-
-        setLocation(ifNode, ctx);
-        return ifNode;
-    }
-
-    @Override
-    public ASTNode visitAssignment(VGraphParser.AssignmentContext ctx) {
-        AssignmentNode node = new AssignmentNode(
-            ctx.ID().getText(),
-            visit(ctx.expr())
-        );
+    public ASTNode visitMoveRetrocede(VGraphParser.MoveRetrocedeContext ctx) {
+        RetrocedeNode node = new RetrocedeNode(visit(ctx.expr()));
         setLocation(node, ctx);
         return node;
     }
@@ -209,16 +83,240 @@ public class VGraphASTBuilder extends VGraphBaseVisitor<ASTNode> {
         return node;
     }
 
+
+    @Override public ASTNode visitStmtTurtleTurn(VGraphParser.StmtTurtleTurnContext ctx) { return visit(ctx.turtleTurnStmt()); }
+    @Override public ASTNode visitStmtTurtleState(VGraphParser.StmtTurtleStateContext ctx) { return visit(ctx.turtleStateStmt()); }
+    @Override public ASTNode visitStmtTurtlePos(VGraphParser.StmtTurtlePosContext ctx) { return visit(ctx.turtlePosStmt()); }
+    @Override public ASTNode visitStmtEspera(VGraphParser.StmtEsperaContext ctx) { return visit(ctx.esperaStmt()); }
+
+    @Override public ASTNode visitTurnRight(VGraphParser.TurnRightContext ctx) { return buildNode(new GiraDerechaNode(visit(ctx.expr())), ctx); }
+    @Override public ASTNode visitTurnLeft(VGraphParser.TurnLeftContext ctx) { return buildNode(new GiraIzquierdaNode(visit(ctx.expr())), ctx); }
+
+    @Override public ASTNode visitStateHide(VGraphParser.StateHideContext ctx) { return buildNode(new OcultaTortugaNode(), ctx); }
+    @Override public ASTNode visitStateSetColor(VGraphParser.StateSetColorContext ctx) { return buildNode(new PonColorLapizNode(ctx.colorName().getText()), ctx); }
+    @Override public ASTNode visitStatePenDown(VGraphParser.StatePenDownContext ctx) { return buildNode(new BajaLapizNode(), ctx); }
+    @Override public ASTNode visitStatePenUp(VGraphParser.StatePenUpContext ctx) { return buildNode(new SubeLapizNode(), ctx); }
+
+    @Override public ASTNode visitPosCenter(VGraphParser.PosCenterContext ctx) { return buildNode(new CentroNode(), ctx); }
+    @Override public ASTNode visitPosSetXYBrackets(VGraphParser.PosSetXYBracketsContext ctx) { return buildNode(new PonPosNode(visit(ctx.expr(0)), visit(ctx.expr(1))), ctx); }
+    @Override public ASTNode visitPosSetXYNoBrackets(VGraphParser.PosSetXYNoBracketsContext ctx) { return buildNode(new PonPosNode(visit(ctx.expr(0)), visit(ctx.expr(1))), ctx); }
+    @Override public ASTNode visitPosSetHeading(VGraphParser.PosSetHeadingContext ctx) { return buildNode(new PonRumboNode(visit(ctx.expr())), ctx); }
+    @Override public ASTNode visitPosSetX(VGraphParser.PosSetXContext ctx) { return buildNode(new PonXNode(visit(ctx.expr())), ctx); }
+    @Override public ASTNode visitPosSetY(VGraphParser.PosSetYContext ctx) { return buildNode(new PonYNode(visit(ctx.expr())), ctx); }
+
+    @Override public ASTNode visitEsperaStmt(VGraphParser.EsperaStmtContext ctx) { return buildNode(new EsperaNode(visit(ctx.expr())), ctx); }
+
+    @Override public ASTNode visitExprRumbo(VGraphParser.ExprRumboContext ctx) { return buildNode(new RumboNode(), ctx); }
+
+    // Helper para reducir la repetición
+    private <T extends ASTNode> T buildNode(T node, ParserRuleContext ctx) {
+        setLocation(node, ctx);
+        return node;
+    }
+
     @Override public ASTNode visitParens(VGraphParser.ParensContext ctx) { return visit(ctx.expr()); }
-    @Override public ASTNode visitCos(VGraphParser.CosContext ctx) { FunctionCallNode n = new FunctionCallNode("cos", visit(ctx.expr())); setLocation(n, ctx); return n; }
-    @Override public ASTNode visitSin(VGraphParser.SinContext ctx) { FunctionCallNode n = new FunctionCallNode("sin", visit(ctx.expr())); setLocation(n, ctx); return n; }
     @Override public ASTNode visitMulDiv(VGraphParser.MulDivContext ctx) { return binOp(ctx, new BinaryOpNode(ctx.op.getText(), visit(ctx.expr(0)), visit(ctx.expr(1)))); }
     @Override public ASTNode visitAddSub(VGraphParser.AddSubContext ctx) { return binOp(ctx, new BinaryOpNode(ctx.op.getText(), visit(ctx.expr(0)), visit(ctx.expr(1)))); }
     @Override public ASTNode visitMod(VGraphParser.ModContext ctx) { return binOp(ctx, new BinaryOpNode(ctx.op.getText(), visit(ctx.left), visit(ctx.right))); }
     @Override public ASTNode visitVar(VGraphParser.VarContext ctx) { VarReferenceNode n = new VarReferenceNode(ctx.ID().getText()); setLocation(n, ctx); return n; }
     @Override public ASTNode visitIntLiteral(VGraphParser.IntLiteralContext ctx) { IntLiteralNode n = new IntLiteralNode(Integer.parseInt(ctx.INT().getText())); setLocation(n, ctx); return n; }
-    @Override public ASTNode visitFloatLiteral(VGraphParser.FloatLiteralContext ctx) { FloatLiteralNode n = new FloatLiteralNode(Double.parseDouble(ctx.FLOAT().getText())); setLocation(n, ctx); return n; }
-    @Override public ASTNode visitColorLiteral(VGraphParser.ColorLiteralContext ctx) { ColorLiteralNode n = new ColorLiteralNode(ctx.COLOR_LITERAL().getText()); setLocation(n, ctx); return n; }
+
+    @Override
+    public ASTNode visitStmtEjecuta(VGraphParser.StmtEjecutaContext ctx) {
+        return visit(ctx.ejecutaStmt());
+    }
+
+    @Override
+    public ASTNode visitEjecutaStmt(VGraphParser.EjecutaStmtContext ctx) {
+        EjecutaNode node = new EjecutaNode();
+        for (VGraphParser.OrdenSinPuntoYComaContext ordenCtx : ctx.ordenList().ordenSinPuntoYComa()) {
+            ASTNode orden = visit(ordenCtx);
+            if (orden != null) {
+                node.addOrden(orden);
+                setLocation(orden, ordenCtx);
+            }
+        }
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitStmtRepite(VGraphParser.StmtRepiteContext ctx) {
+        return visit(ctx.repiteStmt());
+    }
+
+    @Override
+    public ASTNode visitRepiteStmt(VGraphParser.RepiteStmtContext ctx) {
+        RepiteNode node = new RepiteNode(visit(ctx.expr()));
+        for (VGraphParser.OrdenSinPuntoYComaContext ordenCtx : ctx.ordenList().ordenSinPuntoYComa()) {
+            ASTNode orden = visit(ordenCtx);
+            if (orden != null) {
+                node.addOrden(orden);
+                setLocation(orden, ordenCtx);
+            }
+        }
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitStmtSi(VGraphParser.StmtSiContext ctx) {
+        return visit(ctx.siStmt());
+    }
+
+    @Override
+    public ASTNode visitSiStmt(VGraphParser.SiStmtContext ctx) {
+        ConditionNode condicion = visitCondition(ctx.condition());
+        SiNode node = new SiNode(condicion);
+
+        // Procesar el primer bloque [instrucciones]
+        for (VGraphParser.OrdenSinPuntoYComaContext ordenCtx : ctx.ordenList(0).ordenSinPuntoYComa()) {
+            ASTNode orden = visit(ordenCtx);
+            if (orden != null) {
+                node.addInstruccionSi(orden);
+                setLocation(orden, ordenCtx);
+            }
+        }
+
+        // Si hay un segundo bloque [instrucciones], es el ELSE
+        if (ctx.ordenList().size() > 1) {
+            for (VGraphParser.OrdenSinPuntoYComaContext ordenCtx : ctx.ordenList(1).ordenSinPuntoYComa()) {
+                ASTNode orden = visit(ordenCtx);
+                if (orden != null) {
+                    node.addInstruccionSino(orden);
+                    setLocation(orden, ordenCtx);
+                }
+            }
+        }
+
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitStmtHazHasta(VGraphParser.StmtHazHastaContext ctx) {
+        return visit(ctx.hazHastaStmt());
+    }
+
+    @Override
+    public ASTNode visitHazHastaStmt(VGraphParser.HazHastaStmtContext ctx) {
+        ConditionNode condicion = visitCondition(ctx.condition());
+        HazHastaNode node = new HazHastaNode(condicion);
+
+        for (VGraphParser.OrdenSinPuntoYComaContext ordenCtx : ctx.ordenList().ordenSinPuntoYComa()) {
+            ASTNode orden = visit(ordenCtx);
+            if (orden != null) {
+                node.addInstruccion(orden);
+                setLocation(orden, ordenCtx);
+            }
+        }
+
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitStmtHasta(VGraphParser.StmtHastaContext ctx) {
+        return visit(ctx.hastaStmt());
+    }
+
+    @Override
+    public ASTNode visitHastaStmt(VGraphParser.HastaStmtContext ctx) {
+        ConditionNode condicion = visitCondition(ctx.condition());
+        HastaNode node = new HastaNode(condicion);
+
+        for (VGraphParser.OrdenSinPuntoYComaContext ordenCtx : ctx.ordenList().ordenSinPuntoYComa()) {
+            ASTNode orden = visit(ordenCtx);
+            if (orden != null) {
+                node.addInstruccion(orden);
+                setLocation(orden, ordenCtx);
+            }
+        }
+
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitStmtHazMientras(VGraphParser.StmtHazMientrasContext ctx) {
+        return visit(ctx.hazMientrasStmt());
+    }
+
+    @Override
+    public ASTNode visitHazMientrasStmt(VGraphParser.HazMientrasStmtContext ctx) {
+        ConditionNode condicion = visitCondition(ctx.condition());
+        HazMientrasNode node = new HazMientrasNode(condicion);
+
+        for (VGraphParser.OrdenSinPuntoYComaContext ordenCtx : ctx.ordenList().ordenSinPuntoYComa()) {
+            ASTNode orden = visit(ordenCtx);
+            if (orden != null) {
+                node.addInstruccion(orden);
+                setLocation(orden, ordenCtx);
+            }
+        }
+
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitStmtMientras(VGraphParser.StmtMientrasContext ctx) {
+        return visit(ctx.mientrasStmt());
+    }
+
+    @Override
+    public ASTNode visitMientrasStmt(VGraphParser.MientrasStmtContext ctx) {
+        ConditionNode condicion = visitCondition(ctx.condition());
+        MientrasNode node = new MientrasNode(condicion);
+
+        for (VGraphParser.OrdenSinPuntoYComaContext ordenCtx : ctx.ordenList().ordenSinPuntoYComa()) {
+            ASTNode orden = visit(ordenCtx);
+            if (orden != null) {
+                node.addInstruccion(orden);
+                setLocation(orden, ordenCtx);
+            }
+        }
+
+        setLocation(node, ctx);
+        return node;
+    }
+    @Override
+    public ASTNode visitStmtExpr(VGraphParser.StmtExprContext ctx) {
+        return visit(ctx.expr());
+    }
+    @Override
+    public ASTNode visitProducto(VGraphParser.ProductoContext ctx) {
+        ProductoNode node = new ProductoNode();
+        for (VGraphParser.ExprContext exprCtx : ctx.expr()) {
+            node.addOperando(visit(exprCtx));
+        }
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitSuma(VGraphParser.SumaContext ctx) {
+        SumaNode node = new SumaNode();
+        for (VGraphParser.ExprContext exprCtx : ctx.expr()) {
+            node.addOperando(visit(exprCtx));
+        }
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitPotencia(VGraphParser.PotenciaContext ctx) {
+        PotenciaNode node = new PotenciaNode(visit(ctx.expr(0)), visit(ctx.expr(1)));
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitDivision(VGraphParser.DivisionContext ctx) {
+        DivisionNode node = new DivisionNode(visit(ctx.expr(0)), visit(ctx.expr(1)));
+        setLocation(node, ctx);
+        return node;
+    }
 
     // Helpers
     private <T extends ASTNode> T binOp(ParserRuleContext ctx, T node) { setLocation(node, ctx); return node; }
