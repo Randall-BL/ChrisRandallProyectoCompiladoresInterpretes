@@ -231,7 +231,29 @@ public class IDE extends JFrame {
         String result = Main.run(currentFile.getAbsolutePath());
 
         if (result.isEmpty()) {
-            outputArea.setText("Análisis exitoso. AST generado en ast.json.");
+                outputArea.setText("Análisis exitoso. AST generado en ast.json.");
+
+                // Ejecutar el script de Python para graficar el AST
+                try {
+                    ProcessBuilder pb = new ProcessBuilder(
+                        "python",
+                        "frontend/src/main/java/com/miorganizacion/vgraph/frontend/frontend/IDE/graficador.py"
+                        );
+                    pb.redirectErrorStream(true);
+                    Process process = pb.start();
+
+                    // Leer la salida del script
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                    String line;
+                    StringBuilder output = new StringBuilder();
+                    while ((line = reader.readLine()) != null) {
+                        output.append(line).append("\n");
+                    }
+                    process.waitFor();
+                    outputArea.append("\n" + output.toString());
+                } catch (Exception ex) {
+                    outputArea.append("\nError ejecutando graficador.py: " + ex.getMessage());
+                }
         } else {
             errorArea.setText(result);
             tabbedPane.setSelectedIndex(1); // Seleccionar pestaña de errores
