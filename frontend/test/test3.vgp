@@ -1,0 +1,22 @@
+Haz resultado1 iguales? 10 10;
+SI (resultado1 == 1) [avanza 50, poncolorlapiz Rojo];
+
+Haz resultado2 iguales? 5 3;
+SI (resultado2 == 0) [giraderecha 45];
+
+Haz esMayor mayorque? 20 10;
+SI (esMayor == 1) [avanza 40, poncolorlapiz Azul];
+
+Haz condA mayorque? 15 10;
+Haz condB menorque? 15 20;
+Haz resultadoY Y condA condB;
+SI (resultadoY == 1) [avanza 60, poncolorlapiz Negro];
+
+Haz condC iguales? 5 5;
+Haz condD iguales? 3 7;
+Haz resultadoO O condC condD;
+SI (resultadoO == 1) [giraderecha 120];
+
+Haz dif1 Diferencia 100 30;
+
+Haz aleatorio1 azar 360;

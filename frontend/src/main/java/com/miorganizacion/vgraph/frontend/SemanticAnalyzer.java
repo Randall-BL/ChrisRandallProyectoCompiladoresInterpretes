@@ -113,6 +113,41 @@ public class SemanticAnalyzer {
         } else if (node instanceof BlockNode) {
             visitBlock((BlockNode) node);
         }
+        else if (node instanceof EjecutaNode) {
+            visitEjecuta((EjecutaNode) node);
+        }
+        else if (node instanceof RepiteNode) {
+            visitRepite((RepiteNode) node);
+        }else if (node instanceof SiNode) {
+            visitSi((SiNode) node);
+        }
+        else if (node instanceof HazHastaNode) {
+            visitHazHasta((HazHastaNode) node);
+        }
+        else if (node instanceof ConditionNode) {
+            visitCondition((ConditionNode) node);
+        }
+        else if (node instanceof HastaNode) {
+            visitHasta((HastaNode) node);
+        }
+        else if (node instanceof HazMientrasNode) {
+            visitHazMientras((HazMientrasNode) node);
+        }
+        else if (node instanceof MientrasNode) {
+            visitMientras((MientrasNode) node);
+        }
+        else if (node instanceof ProductoNode) {
+            visitProducto((ProductoNode) node);
+        }
+        else if (node instanceof SumaNode) {
+            visitSuma((SumaNode) node);
+        }
+        else if (node instanceof PotenciaNode) {
+            visitPotencia((PotenciaNode) node);
+        }
+        else if (node instanceof DivisionNode) {
+            visitDivision((DivisionNode) node);
+        }
     }
 
  // 1) Infiriendo el tipo de nodo correctamente:
@@ -136,6 +171,10 @@ public class SemanticAnalyzer {
         else if (node instanceof FunctionCallNode || node instanceof BinaryOpNode) {
             return SymbolTable.Type.NUMBER;
         }
+        else if (node instanceof ProductoNode || node instanceof SumaNode ||
+                node instanceof PotenciaNode || node instanceof DivisionNode) {
+            return SymbolTable.Type.NUMBER;
+        }
         return SymbolTable.Type.UNKNOWN;
     }
 
@@ -155,6 +194,198 @@ public class SemanticAnalyzer {
             visit(node.getByValue());
             if (inferType(node.getByValue()) != SymbolTable.Type.NUMBER) {
                 addError(node, "El valor de incremento debe ser numérico.");
+            }
+        }
+    }
+
+    private void visitEjecuta(EjecutaNode node) {
+        // Visitar cada orden (que ya son nodos validados como AvanzaNode, etc.)
+        for (ASTNode orden : node.getOrdenes()) {
+            visit(orden);
+        }
+    }
+
+    private void visitRepite(RepiteNode node) {
+        // Validar que 'veces' sea un número
+        visit(node.getVeces());
+        if (inferType(node.getVeces()) != SymbolTable.Type.NUMBER) {
+            addError(node, "El comando 'repite' espera un valor numérico para la cantidad de repeticiones.");
+        }
+
+        // Validar que sea positivo
+        checkPositive(node, node.getVeces(), "Cantidad de repeticiones");
+
+        // Visitar cada orden dentro del repite
+        for (ASTNode orden : node.getOrdenes()) {
+            visit(orden);
+        }
+    }
+
+    private void visitSi(SiNode node) {
+        // Validar que la condición sea booleana
+        validarCondicionBooleana(node.getCondicion(), "SI");
+
+        // Visitar instrucciones del SI
+        for (ASTNode instruccion : node.getInstruccionesSi()) {
+            visit(instruccion);
+        }
+
+        // Visitar instrucciones del SINO (si existen)
+        if (node.tieneElse()) {
+            for (ASTNode instruccion : node.getInstruccionesSino()) {
+                visit(instruccion);
+            }
+        }
+    }
+
+    private void visitHazHasta(HazHastaNode node) {
+        // Validar que la condición sea booleana
+        validarCondicionBooleana(node.getCondicion(), "HAZ.HASTA");
+
+        // Visitar las instrucciones del cuerpo
+        for (ASTNode instruccion : node.getInstrucciones()) {
+            visit(instruccion);
+        }
+    }
+
+    // Método auxiliar para validar condiciones booleanas
+    private void validarCondicionBooleana(ASTNode condicion, String comando) {
+        if (condicion == null) {
+            addError(condicion, comando + " requiere una condición.");
+            return;
+        }
+
+        // Una condición debe ser un ConditionNode (comparación)
+        if (!(condicion instanceof ConditionNode)) {
+            addError(condicion, "La condición en " + comando + " debe ser una comparación que retorne un valor booleano (ej: x == 5, y > 10). No se puede usar solo una variable o expresión.");
+            return;
+        }
+
+        // Visitar y validar la condición
+        visit(condicion);
+    }
+
+    private void visitCondition(ConditionNode node) {
+        visit(node.getLeft());
+        visit(node.getRight());
+
+        SymbolTable.Type leftType = inferType(node.getLeft());
+        SymbolTable.Type rightType = inferType(node.getRight());
+
+        // Permitir UNKNOWN (variables no inicializadas aún)
+        if (leftType == SymbolTable.Type.UNKNOWN || rightType == SymbolTable.Type.UNKNOWN) {
+            return;
+        }
+
+        // Verificar que ambos lados sean del mismo tipo
+        if (leftType != rightType) {
+            addError(node, "Los operandos de la condición deben ser del mismo tipo. Esperado: " + leftType + ", Encontrado: " + rightType);
+            return;
+        }
+
+        // Validar que sean tipos comparables (números)
+        if (leftType != SymbolTable.Type.NUMBER) {
+            addError(node, "Las condiciones solo pueden comparar valores numéricos. Encontrado tipo: " + leftType);
+            return;
+        }
+
+        // La condición es válida - retorna un valor booleano implícitamente
+    }
+
+    private void visitHasta(HastaNode node) {
+        // Validar que la condición sea booleana
+        validarCondicionBooleana(node.getCondicion(), "HASTA");
+
+        // Visitar las instrucciones del cuerpo
+        for (ASTNode instruccion : node.getInstrucciones()) {
+            visit(instruccion);
+        }
+    }
+
+    private void visitHazMientras(HazMientrasNode node) {
+        // Validar que la condición sea booleana
+        validarCondicionBooleana(node.getCondicion(), "HAZ.MIENTRAS");
+
+        // Visitar las instrucciones del cuerpo
+        for (ASTNode instruccion : node.getInstrucciones()) {
+            visit(instruccion);
+        }
+    }
+
+    private void visitMientras(MientrasNode node) {
+        // Validar que la condición sea booleana
+        validarCondicionBooleana(node.getCondicion(), "MIENTRAS");
+
+        // Visitar las instrucciones del cuerpo
+        for (ASTNode instruccion : node.getInstrucciones()) {
+            visit(instruccion);
+        }
+    }
+
+    private void visitProducto(ProductoNode node) {
+        if (node.getOperandos().size() < 2) {
+            addError(node, "producto requiere al menos 2 operandos.");
+            return;
+        }
+
+        for (ASTNode operando : node.getOperandos()) {
+            visit(operando);
+            SymbolTable.Type type = inferType(operando);
+            if (type != SymbolTable.Type.NUMBER && type != SymbolTable.Type.UNKNOWN) {
+                addError(node, "producto solo acepta valores numéricos.");
+            }
+        }
+    }
+
+    private void visitSuma(SumaNode node) {
+        if (node.getOperandos().size() < 2) {
+            addError(node, "suma requiere al menos 2 operandos.");
+            return;
+        }
+
+        for (ASTNode operando : node.getOperandos()) {
+            visit(operando);
+            SymbolTable.Type type = inferType(operando);
+            if (type != SymbolTable.Type.NUMBER && type != SymbolTable.Type.UNKNOWN) {
+                addError(node, "suma solo acepta valores numéricos.");
+            }
+        }
+    }
+
+    private void visitPotencia(PotenciaNode node) {
+        visit(node.getBase());
+        visit(node.getExponente());
+
+        SymbolTable.Type baseType = inferType(node.getBase());
+        SymbolTable.Type expType = inferType(node.getExponente());
+
+        if (baseType != SymbolTable.Type.NUMBER && baseType != SymbolTable.Type.UNKNOWN) {
+            addError(node, "potencia requiere una base numérica.");
+        }
+        if (expType != SymbolTable.Type.NUMBER && expType != SymbolTable.Type.UNKNOWN) {
+            addError(node, "potencia requiere un exponente numérico.");
+        }
+    }
+
+    private void visitDivision(DivisionNode node) {
+        visit(node.getDividendo());
+        visit(node.getDivisor());
+
+        SymbolTable.Type dividendoType = inferType(node.getDividendo());
+        SymbolTable.Type divisorType = inferType(node.getDivisor());
+
+        if (dividendoType != SymbolTable.Type.NUMBER && dividendoType != SymbolTable.Type.UNKNOWN) {
+            addError(node, "division requiere un dividendo numérico.");
+        }
+        if (divisorType != SymbolTable.Type.NUMBER && divisorType != SymbolTable.Type.UNKNOWN) {
+            addError(node, "division requiere un divisor numérico.");
+        }
+
+        // Advertencia sobre división por cero (solo si es literal)
+        if (node.getDivisor() instanceof IntLiteralNode) {
+            int valor = ((IntLiteralNode) node.getDivisor()).getValue();
+            if (valor == 0) {
+                addError(node, "División por cero detectada.");
             }
         }
     }

@@ -1,0 +1,28 @@
+Ejecuta [avanza 50, giraderecha 90];
+
+repite 4 [avanza 30, giraderecha 90];
+
+#Haz x  10;
+SI (x == 10) [avanza 20];
+
+#Haz y  5;
+SI (y > 10) [giraderecha 45] [giraizquierda 45];
+
+Haz numero  0;
+Haz var1  0;
+Haz bucle  0;
+
+HAZ.HASTA [
+    SI (numero = 3) [avanza 10],
+    SI (var1 = 5) [retrocede 20],
+    inc [bucle 1]
+] (bucle = 1);
+
+Haz x  10;
+HASTA (x < 5) [avanza 20, inc [x 1]];
+
+Haz y  10;
+HAZ.MIENTRAS [avanza 20, inc [y 1]] (y < 5);
+
+Haz z  0;
+MIENTRAS (z < 5) [avanza 15, giraderecha 72, inc [z 1]];
