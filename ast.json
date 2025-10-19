@@ -1,0 +1,305 @@
+{
+  "type" : "Program",
+  "statements" : [ {
+    "type" : "Haz",
+    "identifier" : "resultado1",
+    "expression" : {
+      "type" : "Iguales",
+      "left" : {
+        "type" : "IntLiteral",
+        "value" : 10
+      },
+      "right" : {
+        "type" : "IntLiteral",
+        "value" : 10
+      }
+    },
+    "line" : 1,
+    "column" : 0
+  }, {
+    "type" : "Si",
+    "condicion" : {
+      "type" : "Condition",
+      "left" : {
+        "type" : "VarRef",
+        "varName" : "resultado1"
+      },
+      "operator" : "==",
+      "right" : {
+        "type" : "IntLiteral",
+        "value" : 1
+      }
+    },
+    "instruccionesSi" : [ {
+      "type" : "Avanza",
+      "distance" : {
+        "type" : "IntLiteral",
+        "value" : 50
+      },
+      "line" : 2,
+      "column" : 22
+    }, {
+      "type" : "PonColorLapiz",
+      "line" : 2,
+      "column" : 33,
+      "colorName" : "Rojo"
+    } ]
+  }, {
+    "type" : "Haz",
+    "identifier" : "resultado2",
+    "expression" : {
+      "type" : "Iguales",
+      "left" : {
+        "type" : "IntLiteral",
+        "value" : 5
+      },
+      "right" : {
+        "type" : "IntLiteral",
+        "value" : 3
+      }
+    },
+    "line" : 4,
+    "column" : 0
+  }, {
+    "type" : "Si",
+    "condicion" : {
+      "type" : "Condition",
+      "left" : {
+        "type" : "VarRef",
+        "varName" : "resultado2"
+      },
+      "operator" : "==",
+      "right" : {
+        "type" : "IntLiteral",
+        "value" : 0
+      }
+    },
+    "instruccionesSi" : [ {
+      "type" : "GiraDerecha",
+      "line" : 5,
+      "column" : 22,
+      "angle" : {
+        "type" : "IntLiteral",
+        "value" : 45
+      }
+    } ]
+  }, {
+    "type" : "Haz",
+    "identifier" : "esMayor",
+    "expression" : {
+      "type" : "MayorQue",
+      "left" : {
+        "type" : "IntLiteral",
+        "value" : 20
+      },
+      "right" : {
+        "type" : "IntLiteral",
+        "value" : 10
+      }
+    },
+    "line" : 7,
+    "column" : 0
+  }, {
+    "type" : "Si",
+    "condicion" : {
+      "type" : "Condition",
+      "left" : {
+        "type" : "VarRef",
+        "varName" : "esMayor"
+      },
+      "operator" : "==",
+      "right" : {
+        "type" : "IntLiteral",
+        "value" : 1
+      }
+    },
+    "instruccionesSi" : [ {
+      "type" : "Avanza",
+      "distance" : {
+        "type" : "IntLiteral",
+        "value" : 40
+      },
+      "line" : 8,
+      "column" : 19
+    }, {
+      "type" : "PonColorLapiz",
+      "line" : 8,
+      "column" : 30,
+      "colorName" : "Azul"
+    } ]
+  }, {
+    "type" : "Haz",
+    "identifier" : "condA",
+    "expression" : {
+      "type" : "MayorQue",
+      "left" : {
+        "type" : "IntLiteral",
+        "value" : 15
+      },
+      "right" : {
+        "type" : "IntLiteral",
+        "value" : 10
+      }
+    },
+    "line" : 10,
+    "column" : 0
+  }, {
+    "type" : "Haz",
+    "identifier" : "condB",
+    "expression" : {
+      "type" : "MenorQue",
+      "left" : {
+        "type" : "IntLiteral",
+        "value" : 15
+      },
+      "right" : {
+        "type" : "IntLiteral",
+        "value" : 20
+      }
+    },
+    "line" : 11,
+    "column" : 0
+  }, {
+    "type" : "Haz",
+    "identifier" : "resultadoY",
+    "expression" : {
+      "type" : "YLogico",
+      "left" : {
+        "type" : "VarRef",
+        "varName" : "condA"
+      },
+      "right" : {
+        "type" : "VarRef",
+        "varName" : "condB"
+      }
+    },
+    "line" : 12,
+    "column" : 0
+  }, {
+    "type" : "Si",
+    "condicion" : {
+      "type" : "Condition",
+      "left" : {
+        "type" : "VarRef",
+        "varName" : "resultadoY"
+      },
+      "operator" : "==",
+      "right" : {
+        "type" : "IntLiteral",
+        "value" : 1
+      }
+    },
+    "instruccionesSi" : [ {
+      "type" : "Avanza",
+      "distance" : {
+        "type" : "IntLiteral",
+        "value" : 60
+      },
+      "line" : 13,
+      "column" : 22
+    }, {
+      "type" : "PonColorLapiz",
+      "line" : 13,
+      "column" : 33,
+      "colorName" : "Negro"
+    } ]
+  }, {
+    "type" : "Haz",
+    "identifier" : "condC",
+    "expression" : {
+      "type" : "Iguales",
+      "left" : {
+        "type" : "IntLiteral",
+        "value" : 5
+      },
+      "right" : {
+        "type" : "IntLiteral",
+        "value" : 5
+      }
+    },
+    "line" : 15,
+    "column" : 0
+  }, {
+    "type" : "Haz",
+    "identifier" : "condD",
+    "expression" : {
+      "type" : "Iguales",
+      "left" : {
+        "type" : "IntLiteral",
+        "value" : 3
+      },
+      "right" : {
+        "type" : "IntLiteral",
+        "value" : 7
+      }
+    },
+    "line" : 16,
+    "column" : 0
+  }, {
+    "type" : "Haz",
+    "identifier" : "resultadoO",
+    "expression" : {
+      "type" : "OLogico",
+      "left" : {
+        "type" : "VarRef",
+        "varName" : "condC"
+      },
+      "right" : {
+        "type" : "VarRef",
+        "varName" : "condD"
+      }
+    },
+    "line" : 17,
+    "column" : 0
+  }, {
+    "type" : "Si",
+    "condicion" : {
+      "type" : "Condition",
+      "left" : {
+        "type" : "VarRef",
+        "varName" : "resultadoO"
+      },
+      "operator" : "==",
+      "right" : {
+        "type" : "IntLiteral",
+        "value" : 1
+      }
+    },
+    "instruccionesSi" : [ {
+      "type" : "GiraDerecha",
+      "line" : 18,
+      "column" : 22,
+      "angle" : {
+        "type" : "IntLiteral",
+        "value" : 120
+      }
+    } ]
+  }, {
+    "type" : "Haz",
+    "identifier" : "dif1",
+    "expression" : {
+      "type" : "Diferencia",
+      "operandos" : [ {
+        "type" : "IntLiteral",
+        "value" : 100
+      }, {
+        "type" : "IntLiteral",
+        "value" : 30
+      } ]
+    },
+    "line" : 20,
+    "column" : 0
+  }, {
+    "type" : "Haz",
+    "identifier" : "aleatorio1",
+    "expression" : {
+      "type" : "Azar",
+      "limite" : {
+        "type" : "IntLiteral",
+        "value" : 360
+      }
+    },
+    "line" : 22,
+    "column" : 0
+  } ]
+}

@@ -18,6 +18,7 @@ com\miorganizacion\vgraph\frontend\VGraphParser$EsperaStmtSinPCContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$PosSetHeadingSinPCContext.class
 com\miorganizacion\vgraph\frontend\ast\FloatLiteralNode.class
 com\miorganizacion\vgraph\frontend\ast\WaitNode.class
+com\miorganizacion\vgraph\frontend\CodeGenerator$SymbolInfo.class
 com\miorganizacion\vgraph\frontend\VGraphParser$MoveRetrocedeSinPCContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$TurtleMoveStmtSinPCContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$HastaStmtContext.class
@@ -69,7 +70,6 @@ com\miorganizacion\vgraph\frontend\VGraphParser$VarContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$PosSetXYNoBracketsSinPCContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$ColorNameContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$DiferenciaContext.class
-com\miorganizacion\vgraph\frontend\VGraphParser$MayorQueContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$ParensContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$StmtTurtleStateContext.class
 com\miorganizacion\vgraph\frontend\ast\HazHastaNode.class
@@ -79,6 +79,7 @@ com\miorganizacion\vgraph\frontend\VGraphParser$DrawPixelContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$WaitStmtContext.class
 com\miorganizacion\vgraph\frontend\VGraphBaseListener.class
 com\miorganizacion\vgraph\frontend\ast\SiNode.class
+com\miorganizacion\vgraph\frontend\TurtlePanel.class
 com\miorganizacion\vgraph\frontend\ast\CentroNode.class
 com\miorganizacion\vgraph\frontend\VGraphParser$SiStmtContext.class
 com\miorganizacion\vgraph\frontend\ast\AvanzaNode.class
@@ -95,8 +96,10 @@ com\miorganizacion\vgraph\frontend\VGraphParser$SumaContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$OrdenSinPuntoYComaContext.class
 com\miorganizacion\vgraph\frontend\ast\FrameNode.class
 com\miorganizacion\vgraph\frontend\VGraphParser$TurnRightSinPCContext.class
+com\miorganizacion\vgraph\frontend\VGraphParser$MenorqueContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$PosSetXContext.class
 com\miorganizacion\vgraph\frontend\ast\BinaryOpNode.class
+com\miorganizacion\vgraph\frontend\VGraphParser$MayorqueContext.class
 com\miorganizacion\vgraph\frontend\ast\AssignmentNode.class
 com\miorganizacion\vgraph\frontend\ast\DrawLineNode.class
 com\miorganizacion\vgraph\frontend\ast\PotenciaNode.class
@@ -140,6 +143,7 @@ com\miorganizacion\vgraph\frontend\ast\IfNode.class
 com\miorganizacion\vgraph\frontend\VGraphParser$StatePenUpSinPCContext.class
 com\miorganizacion\vgraph\frontend\ast\BajaLapizNode.class
 com\miorganizacion\vgraph\frontend\ast\MenorQueNode.class
+com\miorganizacion\vgraph\frontend\CodeGenerator.class
 com\miorganizacion\vgraph\frontend\VGraphParser$PotenciaContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$PosCenterSinPCContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$StmtHazMientrasContext.class
@@ -147,7 +151,6 @@ com\miorganizacion\vgraph\frontend\VGraphParser$TurtleMoveStmtContext.class
 com\miorganizacion\vgraph\frontend\SemanticAnalyzer.class
 com\miorganizacion\vgraph\frontend\VGraphParser$StateHideContext.class
 com\miorganizacion\vgraph\frontend\ast\ConditionNode.class
-com\miorganizacion\vgraph\frontend\VGraphParser$MenorQueContext.class
 com\miorganizacion\vgraph\frontend\ast\HastaNode.class
 com\miorganizacion\vgraph\frontend\ast\ProgramNode.class
 com\miorganizacion\vgraph\frontend\ast\PixelNode.class

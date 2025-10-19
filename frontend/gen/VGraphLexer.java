@@ -1,4 +1,4 @@
-// Generated from C:/Users/YITAN/OneDrive/Escritorio/Compi/ChrisRandallProyectoCompiladoresInterpretes/frontend/src/main/antlr4/com/miorganizacion/vgraph/frontend/VGraph.g4 by ANTLR 4.13.2
+// Generated from E:/tec/2025/iisem/Compiladores E Interpetres/Proyecto/ChrisRandallProyectoCompiladoresInterpretes/frontend/src/main/antlr4/com/miorganizacion/vgraph/frontend/VGraph.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;

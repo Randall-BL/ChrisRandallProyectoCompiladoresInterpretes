@@ -1049,6 +1049,18 @@ public class VGraphBaseListener implements VGraphListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMayorque(VGraphParser.MayorqueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMayorque(VGraphParser.MayorqueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDivision(VGraphParser.DivisionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1073,18 +1085,6 @@ public class VGraphBaseListener implements VGraphListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMayorQue(VGraphParser.MayorQueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMayorQue(VGraphParser.MayorQueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterPotencia(VGraphParser.PotenciaContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1097,13 +1097,13 @@ public class VGraphBaseListener implements VGraphListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMenorQue(VGraphParser.MenorQueContext ctx) { }
+	@Override public void enterMenorque(VGraphParser.MenorqueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMenorQue(VGraphParser.MenorQueContext ctx) { }
+	@Override public void exitMenorque(VGraphParser.MenorqueContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

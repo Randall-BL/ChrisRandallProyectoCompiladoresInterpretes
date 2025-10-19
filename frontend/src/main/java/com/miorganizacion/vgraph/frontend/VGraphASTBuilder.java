@@ -83,6 +83,129 @@ public class VGraphASTBuilder extends VGraphBaseVisitor<ASTNode> {
         return node;
     }
 
+    @Override
+    public ASTNode visitIguales(VGraphParser.IgualesContext ctx) {
+        // La gramática de ANTLR usa 'expr' dos veces, las accedemos por índice (0 y 1)
+        IgualesNode node = new IgualesNode(visit(ctx.expr(0)), visit(ctx.expr(1)));
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitMayorque(VGraphParser.MayorqueContext ctx) {
+        MayorQueNode node = new MayorQueNode(visit(ctx.expr(0)), visit(ctx.expr(1)));
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitMenorque(VGraphParser.MenorqueContext ctx) {
+        MenorQueNode node = new MenorQueNode(visit(ctx.expr(0)), visit(ctx.expr(1)));
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitYLogico(VGraphParser.YLogicoContext ctx) {
+        YLogicoNode node = new YLogicoNode(visit(ctx.expr(0)), visit(ctx.expr(1)));
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitOLogico(VGraphParser.OLogicoContext ctx) {
+        OLogicoNode node = new OLogicoNode(visit(ctx.expr(0)), visit(ctx.expr(1)));
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitDiferencia(VGraphParser.DiferenciaContext ctx) {
+        DiferenciaNode node = new DiferenciaNode();
+        for (VGraphParser.ExprContext exprCtx : ctx.expr()) {
+            node.addOperando(visit(exprCtx));
+        }
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitAzar(VGraphParser.AzarContext ctx) {
+        AzarNode node = new AzarNode(visit(ctx.expr()));
+        setLocation(node, ctx);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitMoveAvanzaSinPC(VGraphParser.MoveAvanzaSinPCContext ctx) {
+        return buildNode(new AvanzaNode(visit(ctx.expr())), ctx);
+    }
+
+    @Override
+    public ASTNode visitMoveRetrocedeSinPC(VGraphParser.MoveRetrocedeSinPCContext ctx) {
+        return buildNode(new RetrocedeNode(visit(ctx.expr())), ctx);
+    }
+
+    @Override
+    public ASTNode visitTurnRightSinPC(VGraphParser.TurnRightSinPCContext ctx) {
+        return buildNode(new GiraDerechaNode(visit(ctx.expr())), ctx);
+    }
+
+    @Override
+    public ASTNode visitTurnLeftSinPC(VGraphParser.TurnLeftSinPCContext ctx) {
+        return buildNode(new GiraIzquierdaNode(visit(ctx.expr())), ctx);
+    }
+
+    @Override
+    public ASTNode visitStateHideSinPC(VGraphParser.StateHideSinPCContext ctx) {
+        return buildNode(new OcultaTortugaNode(), ctx);
+    }
+
+    @Override
+    public ASTNode visitStateSetColorSinPC(VGraphParser.StateSetColorSinPCContext ctx) {
+        return buildNode(new PonColorLapizNode(ctx.colorName().getText()), ctx);
+    }
+
+    @Override
+    public ASTNode visitStatePenDownSinPC(VGraphParser.StatePenDownSinPCContext ctx) {
+        return buildNode(new BajaLapizNode(), ctx);
+    }
+
+    @Override
+    public ASTNode visitStatePenUpSinPC(VGraphParser.StatePenUpSinPCContext ctx) {
+        return buildNode(new SubeLapizNode(), ctx);
+    }
+
+    @Override
+    public ASTNode visitPosCenterSinPC(VGraphParser.PosCenterSinPCContext ctx) {
+        return buildNode(new CentroNode(), ctx);
+    }
+
+    @Override
+    public ASTNode visitPosSetXYBracketsSinPC(VGraphParser.PosSetXYBracketsSinPCContext ctx) {
+        return buildNode(new PonPosNode(visit(ctx.expr(0)), visit(ctx.expr(1))), ctx);
+    }
+
+    @Override
+    public ASTNode visitPosSetXYNoBracketsSinPC(VGraphParser.PosSetXYNoBracketsSinPCContext ctx) {
+        return buildNode(new PonPosNode(visit(ctx.expr(0)), visit(ctx.expr(1))), ctx);
+    }
+
+    @Override
+    public ASTNode visitPosSetHeadingSinPC(VGraphParser.PosSetHeadingSinPCContext ctx) {
+        return buildNode(new PonRumboNode(visit(ctx.expr())), ctx);
+    }
+
+    @Override
+    public ASTNode visitPosSetXSinPC(VGraphParser.PosSetXSinPCContext ctx) {
+        return buildNode(new PonXNode(visit(ctx.expr())), ctx);
+    }
+
+    @Override
+    public ASTNode visitPosSetYSinPC(VGraphParser.PosSetYSinPCContext ctx) {
+        return buildNode(new PonYNode(visit(ctx.expr())), ctx);
+    }
+
 
     @Override public ASTNode visitStmtTurtleTurn(VGraphParser.StmtTurtleTurnContext ctx) { return visit(ctx.turtleTurnStmt()); }
     @Override public ASTNode visitStmtTurtleState(VGraphParser.StmtTurtleStateContext ctx) { return visit(ctx.turtleStateStmt()); }

@@ -182,8 +182,8 @@ expr
     | IGUALES expr expr                 # Iguales
     | Y expr expr                       # YLogico
     | O expr expr                       # OLogico
-    | MAYORQUE expr expr                # MayorQue
-    | MENORQUE expr expr                # MenorQue
+    | MAYORQUE expr expr                # Mayorque
+    | MENORQUE expr expr                # Menorque
     | DIFERENCIA expr expr+             # Diferencia
     | AZAR expr                         # Azar
     | PRODUCTO expr expr+               # Producto
