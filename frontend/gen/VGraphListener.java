@@ -1,4 +1,4 @@
-// Generated from C:/Users/YITAN/OneDrive/Escritorio/Compi/ChrisRandallProyectoCompiladoresInterpretes/frontend/src/main/antlr4/com/miorganizacion/vgraph/frontend/VGraph.g4 by ANTLR 4.13.2
+// Generated from E:/tec/2025/iisem/Compiladores E Interpetres/Proyecto/ChrisRandallProyectoCompiladoresInterpretes/frontend/src/main/antlr4/com/miorganizacion/vgraph/frontend/VGraph.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -991,6 +991,18 @@ public interface VGraphListener extends ParseTreeListener {
 	 */
 	void exitExprRumbo(VGraphParser.ExprRumboContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code Mayorque}
+	 * labeled alternative in {@link VGraphParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterMayorque(VGraphParser.MayorqueContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Mayorque}
+	 * labeled alternative in {@link VGraphParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitMayorque(VGraphParser.MayorqueContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code Division}
 	 * labeled alternative in {@link VGraphParser#expr}.
 	 * @param ctx the parse tree
@@ -1015,18 +1027,6 @@ public interface VGraphListener extends ParseTreeListener {
 	 */
 	void exitIntLiteral(VGraphParser.IntLiteralContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code MayorQue}
-	 * labeled alternative in {@link VGraphParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterMayorQue(VGraphParser.MayorQueContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code MayorQue}
-	 * labeled alternative in {@link VGraphParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitMayorQue(VGraphParser.MayorQueContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code Potencia}
 	 * labeled alternative in {@link VGraphParser#expr}.
 	 * @param ctx the parse tree
@@ -1039,15 +1039,15 @@ public interface VGraphListener extends ParseTreeListener {
 	 */
 	void exitPotencia(VGraphParser.PotenciaContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code MenorQue}
+	 * Enter a parse tree produced by the {@code Menorque}
 	 * labeled alternative in {@link VGraphParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterMenorQue(VGraphParser.MenorQueContext ctx);
+	void enterMenorque(VGraphParser.MenorqueContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code MenorQue}
+	 * Exit a parse tree produced by the {@code Menorque}
 	 * labeled alternative in {@link VGraphParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitMenorQue(VGraphParser.MenorQueContext ctx);
+	void exitMenorque(VGraphParser.MenorqueContext ctx);
 }

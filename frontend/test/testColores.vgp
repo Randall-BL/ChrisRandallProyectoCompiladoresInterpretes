@@ -1,0 +1,34 @@
+centro;
+bajalapiz;
+
+poncolorlapiz Rojo;
+avanza 60;
+giraderecha 45;
+
+poncolorlapiz Verde;
+avanza 60;
+giraderecha 45;
+
+poncolorlapiz Azul;
+avanza 60;
+giraderecha 45;
+
+poncolorlapiz Amarillo;
+avanza 60;
+giraderecha 45;
+
+poncolorlapiz Cyan;
+avanza 60;
+giraderecha 45;
+
+poncolorlapiz Magenta;
+avanza 60;
+giraderecha 45;
+
+poncolorlapiz Blanco;
+avanza 60;
+giraderecha 45;
+
+poncolorlapiz Negro;
+avanza 60;
+giraderecha 45;

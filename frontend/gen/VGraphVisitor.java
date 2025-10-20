@@ -1,4 +1,4 @@
-// Generated from C:/Users/YITAN/OneDrive/Escritorio/Compi/ChrisRandallProyectoCompiladoresInterpretes/frontend/src/main/antlr4/com/miorganizacion/vgraph/frontend/VGraph.g4 by ANTLR 4.13.2
+// Generated from E:/tec/2025/iisem/Compiladores E Interpetres/Proyecto/ChrisRandallProyectoCompiladoresInterpretes/frontend/src/main/antlr4/com/miorganizacion/vgraph/frontend/VGraph.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -588,6 +588,13 @@ public interface VGraphVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExprRumbo(VGraphParser.ExprRumboContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code Mayorque}
+	 * labeled alternative in {@link VGraphParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMayorque(VGraphParser.MayorqueContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code Division}
 	 * labeled alternative in {@link VGraphParser#expr}.
 	 * @param ctx the parse tree
@@ -602,13 +609,6 @@ public interface VGraphVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIntLiteral(VGraphParser.IntLiteralContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code MayorQue}
-	 * labeled alternative in {@link VGraphParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMayorQue(VGraphParser.MayorQueContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code Potencia}
 	 * labeled alternative in {@link VGraphParser#expr}.
 	 * @param ctx the parse tree
@@ -616,10 +616,10 @@ public interface VGraphVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPotencia(VGraphParser.PotenciaContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code MenorQue}
+	 * Visit a parse tree produced by the {@code Menorque}
 	 * labeled alternative in {@link VGraphParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMenorQue(VGraphParser.MenorQueContext ctx);
+	T visitMenorque(VGraphParser.MenorqueContext ctx);
 }

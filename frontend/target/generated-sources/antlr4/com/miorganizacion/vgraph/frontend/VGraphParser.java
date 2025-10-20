@@ -4045,6 +4045,30 @@ public class VGraphParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
+	public static class MayorqueContext extends ExprContext {
+		public TerminalNode MAYORQUE() { return getToken(VGraphParser.MAYORQUE, 0); }
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public MayorqueContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof VGraphListener ) ((VGraphListener)listener).enterMayorque(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof VGraphListener ) ((VGraphListener)listener).exitMayorque(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof VGraphVisitor ) return ((VGraphVisitor<? extends T>)visitor).visitMayorque(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class DivisionContext extends ExprContext {
 		public TerminalNode DIVISION() { return getToken(VGraphParser.DIVISION, 0); }
 		public List<ExprContext> expr() {
@@ -4087,30 +4111,6 @@ public class VGraphParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class MayorQueContext extends ExprContext {
-		public TerminalNode MAYORQUE() { return getToken(VGraphParser.MAYORQUE, 0); }
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
-		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
-		}
-		public MayorQueContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof VGraphListener ) ((VGraphListener)listener).enterMayorQue(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof VGraphListener ) ((VGraphListener)listener).exitMayorQue(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof VGraphVisitor ) return ((VGraphVisitor<? extends T>)visitor).visitMayorQue(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
 	public static class PotenciaContext extends ExprContext {
 		public TerminalNode POTENCIA() { return getToken(VGraphParser.POTENCIA, 0); }
 		public List<ExprContext> expr() {
@@ -4135,7 +4135,7 @@ public class VGraphParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class MenorQueContext extends ExprContext {
+	public static class MenorqueContext extends ExprContext {
 		public TerminalNode MENORQUE() { return getToken(VGraphParser.MENORQUE, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
@@ -4143,18 +4143,18 @@ public class VGraphParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public MenorQueContext(ExprContext ctx) { copyFrom(ctx); }
+		public MenorqueContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof VGraphListener ) ((VGraphListener)listener).enterMenorQue(this);
+			if ( listener instanceof VGraphListener ) ((VGraphListener)listener).enterMenorque(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof VGraphListener ) ((VGraphListener)listener).exitMenorQue(this);
+			if ( listener instanceof VGraphListener ) ((VGraphListener)listener).exitMenorque(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof VGraphVisitor ) return ((VGraphVisitor<? extends T>)visitor).visitMenorQue(this);
+			if ( visitor instanceof VGraphVisitor ) return ((VGraphVisitor<? extends T>)visitor).visitMenorque(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4242,7 +4242,7 @@ public class VGraphParser extends Parser {
 				break;
 			case MAYORQUE:
 				{
-				_localctx = new MayorQueContext(_localctx);
+				_localctx = new MayorqueContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(468);
@@ -4255,7 +4255,7 @@ public class VGraphParser extends Parser {
 				break;
 			case MENORQUE:
 				{
-				_localctx = new MenorQueContext(_localctx);
+				_localctx = new MenorqueContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(472);

@@ -1,0 +1,45 @@
+{
+  "type" : "Program",
+  "statements" : [ {
+    "type" : "Haz",
+    "identifier" : "contador",
+    "expression" : {
+      "type" : "IntLiteral",
+      "value" : 0
+    },
+    "line" : 1,
+    "column" : 0
+  }, {
+    "type" : "Haz",
+    "identifier" : "limite",
+    "expression" : {
+      "type" : "IntLiteral",
+      "value" : 5
+    },
+    "line" : 2,
+    "column" : 8
+  }, {
+    "type" : "Mientras",
+    "condicion" : {
+      "type" : "Condition",
+      "left" : {
+        "type" : "VarRef",
+        "varName" : "contador"
+      },
+      "operator" : "<",
+      "right" : {
+        "type" : "VarRef",
+        "varName" : "limite"
+      }
+    },
+    "instrucciones" : [ {
+      "type" : "Avanza",
+      "distance" : {
+        "type" : "IntLiteral",
+        "value" : 10
+      },
+      "line" : 5,
+      "column" : 12
+    } ]
+  } ]
+}

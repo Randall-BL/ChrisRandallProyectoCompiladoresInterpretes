@@ -7,8 +7,11 @@ import java.awt.*;
 import java.io.*;
 import java.nio.file.*;
 import com.miorganizacion.vgraph.frontend.Main;
+import com.miorganizacion.vgraph.frontend.TurtlePanel;
+
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
+
 
 public class IDE extends JFrame {
 
@@ -19,7 +22,8 @@ public class IDE extends JFrame {
     private File currentFile;
     private Timer highlightTimer;
     private DocumentListener docListener;
-    private JTabbedPane tabbedPane; // Referencia a tabbedPane	
+    private JTabbedPane tabbedPane; // Referencia a tabbedPane
+    private TurtlePanel turtleCanvas;
 
     public IDE() {
         super("VGraph IDE");
@@ -32,7 +36,7 @@ public class IDE extends JFrame {
     private void initComponents() {
         // Crear el editor con el nuevo syntax highlighter
         editor = new SyntaxHighlighter();
-        
+
         // Configurar área de números de línea
         lineNumbers = new JTextArea("1");
         lineNumbers.setEditable(false);
@@ -47,15 +51,15 @@ public class IDE extends JFrame {
 
         // Listener para detectar cambios en el editor
         docListener = new DocumentListener() {
-            @Override 
-            public void insertUpdate(DocumentEvent e) { 
-                highlightTimer.restart(); 
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                highlightTimer.restart();
             }
-            @Override 
-            public void removeUpdate(DocumentEvent e) { 
-                highlightTimer.restart(); 
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                highlightTimer.restart();
             }
-            @Override 
+            @Override
             public void changedUpdate(DocumentEvent e) {}
         };
         editor.getDocument().addDocumentListener(docListener);
@@ -64,6 +68,19 @@ public class IDE extends JFrame {
         JScrollPane scrollEditor = new JScrollPane(editor);
         scrollEditor.setRowHeaderView(lineNumbers);
         scrollEditor.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        // ------------------- INICIO DE LA CORRECCIÓN -------------------
+
+        // 1. Crear el nuevo panel para la tortuga y su scroll pane
+        turtleCanvas = new TurtlePanel();
+        JScrollPane scrollCanvas = new JScrollPane(turtleCanvas);
+
+        // 2. Crear el panel de pestañas para la parte SUPERIOR de la ventana
+        JTabbedPane mainDisplay = new JTabbedPane();
+        mainDisplay.addTab("Editor", scrollEditor);
+        mainDisplay.addTab("Lienzo de Tortuga", scrollCanvas);
+
+        // ------------------- FIN DE LA CORRECCIÓN -------------------
 
         // Áreas de salida y errores con mejor formato
         outputArea = new JTextArea();
@@ -79,58 +96,50 @@ public class IDE extends JFrame {
         errorArea.setBorder(new EmptyBorder(5, 10, 5, 10));
         JScrollPane scrollError = new JScrollPane(errorArea);
 
-        // Pestañas para salida y errores
+        // Pestañas para la parte INFERIOR (salida y errores)
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Resultado", scrollOutput);
         tabbedPane.addTab("Errores", scrollError);
 
-        // Divisor entre editor y pestañas
-        JSplitPane split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, scrollEditor, tabbedPane);
+        // --- CAMBIO CLAVE AQUÍ ---
+        // CORRECCIÓN: Usar 'mainDisplay' como el componente superior del JSplitPane
+        JSplitPane split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, mainDisplay, tabbedPane);
         split.setDividerLocation(500);
         split.setResizeWeight(0.7);
 
-        // Barra de menú
+        // Barra de menú (sin cambios)
         JMenuBar menuBar = new JMenuBar();
-        
-        // Menú Archivo
         JMenu fileMenu = new JMenu("Archivo");
         fileMenu.setMnemonic('A');
-        
         JMenuItem openItem = new JMenuItem("Abrir");
         JMenuItem saveItem = new JMenuItem("Guardar");
         JMenuItem saveAsItem = new JMenuItem("Guardar como...");
         JMenuItem exitItem = new JMenuItem("Salir");
-        
         fileMenu.add(openItem);
         fileMenu.add(saveItem);
         fileMenu.add(saveAsItem);
         fileMenu.addSeparator();
         fileMenu.add(exitItem);
-        
-        // Menú Ejecutar
+
         JMenu runMenu = new JMenu("Ejecutar");
         runMenu.setMnemonic('E');
-        
         JMenuItem runItem = new JMenuItem("Ejecutar análisis");
         JMenuItem clearItem = new JMenuItem("Limpiar resultados");
-        
         runMenu.add(runItem);
         runMenu.add(clearItem);
-        
-        // Menú Ayuda
+
         JMenu helpMenu = new JMenu("Ayuda");
         helpMenu.setMnemonic('y');
         JMenuItem aboutItem = new JMenuItem("Acerca de...");
         helpMenu.add(aboutItem);
-        
-        // Agregar menús a la barra
+
         menuBar.add(fileMenu);
         menuBar.add(runMenu);
         menuBar.add(helpMenu);
-        
+
         setJMenuBar(menuBar);
 
-        // Eventos de menú
+        // Eventos de menú (sin cambios)
         openItem.addActionListener(e -> openFile());
         saveItem.addActionListener(e -> saveFile(false));
         saveAsItem.addActionListener(e -> saveFile(true));
@@ -141,7 +150,7 @@ public class IDE extends JFrame {
 
         // Contenido principal
         getContentPane().add(split, BorderLayout.CENTER);
-        
+
         // Barra de estado
         JLabel statusBar = new JLabel(" Listo");
         statusBar.setBorder(BorderFactory.createEtchedBorder());
@@ -217,46 +226,120 @@ public class IDE extends JFrame {
 
     private void runInterpreter() {
         if (currentFile == null) {
-            showError("No hay archivo seleccionado para ejecutar.");
+            showError("Primero guarda el archivo para compilarlo.");
+            return;
+        }
+        saveFile(false);
+        outputArea.setText("");
+        errorArea.setText("");
+        turtleCanvas.resetTurtle();
+
+        // ---------------------------------------------------------------
+        // PASO 1: Ejecutar el análisis del Frontend (Sintáctico, Semántico y Generación de IR)
+        // ---------------------------------------------------------------
+        String frontendResult = Main.run(currentFile.getAbsolutePath());
+
+        if (!frontendResult.isEmpty()) {
+            // Si el frontend encontró errores, muéstralos y detente.
+            errorArea.setText(frontendResult);
+            tabbedPane.setSelectedIndex(1); // Muestra la pestaña de errores
             return;
         }
 
-        saveFile(false); // Guardar antes de ejecutar
+        // Si llegamos aquí, el Frontend fue exitoso.
+        outputArea.setText("Análisis de Frontend exitoso. AST y LLVM IR generados.\n");
 
-        // Limpiar resultados anteriores
-        outputArea.setText("");
-        errorArea.setText("");
+        // ---------------------------------------------------------------
+        // PASO 2: Visualizar el AST con el script de Python
+        // ---------------------------------------------------------------
+        outputArea.append("Ejecutando visualizador de AST...\n");
+        try {
+            ProcessBuilder pb = new ProcessBuilder(
+                    "python",
+                    "frontend/src/main/java/com/miorganizacion/vgraph/frontend/frontend/IDE/graficador.py"
+            );
+            pb.redirectErrorStream(true);
+            Process process = pb.start();
 
-        // Ejecutar análisis
-        String result = Main.run(currentFile.getAbsolutePath());
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                StringBuilder scriptOutput = new StringBuilder();
+                reader.lines().forEach(line -> scriptOutput.append(line).append("\n"));
+                process.waitFor();
+                outputArea.append(scriptOutput.toString());
+            }
+        } catch (Exception ex) {
+            outputArea.append("ADVERTENCIA: No se pudo ejecutar graficador.py: " + ex.getMessage() + "\n");
+        }
 
-        if (result.isEmpty()) {
-                outputArea.setText("Análisis exitoso. AST generado en ast.json.");
+        // ---------------------------------------------------------------
+        // PASO 3: Compilar el Backend (LLVM IR -> Ejecutable)
+        // ---------------------------------------------------------------
+        outputArea.append("\nCompilando el backend a un ejecutable...\n");
+        boolean compilationSuccess = Main.compileLLVM("output.ll", "mi_programa.exe");
 
-                // Ejecutar el script de Python para graficar el AST
-                try {
-                    ProcessBuilder pb = new ProcessBuilder(
-                        "python",
-                        "frontend/src/main/java/com/miorganizacion/vgraph/frontend/frontend/IDE/graficador.py"
-                        );
-                    pb.redirectErrorStream(true);
-                    Process process = pb.start();
+        if (!compilationSuccess) {
+            errorArea.setText("Error durante la compilación del backend. Revisa la consola del IDE para más detalles.");
+            tabbedPane.setSelectedIndex(1);
+            return;
+        }
 
-                    // Leer la salida del script
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        outputArea.append("¡Compilación de Backend exitosa! Ejecutable 'mi_programa' creado.\n\n");
+        outputArea.append("--- Salida del Programa ---\n");
+
+        // ---------------------------------------------------------------
+        // PASO 4: Ejecutar el programa compilado y visualizar en el lienzo
+        // ---------------------------------------------------------------
+        new Thread(() -> {
+            try {
+                ProcessBuilder pb = new ProcessBuilder("./mi_programa");
+                Process process = pb.start();
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                     String line;
-                    StringBuilder output = new StringBuilder();
                     while ((line = reader.readLine()) != null) {
-                        output.append(line).append("\n");
+                        final String currentLine = line;
+                        // Actualiza la UI en el hilo de eventos de Swing para evitar problemas
+                        SwingUtilities.invokeLater(() -> parseAndDraw(currentLine));
                     }
-                    process.waitFor();
-                    outputArea.append("\n" + output.toString());
-                } catch (Exception ex) {
-                    outputArea.append("\nError ejecutando graficador.py: " + ex.getMessage());
                 }
-        } else {
-            errorArea.setText(result);
-            tabbedPane.setSelectedIndex(1); // Seleccionar pestaña de errores
+                int exitCode = process.waitFor();
+                SwingUtilities.invokeLater(() -> outputArea.append("--- Ejecución finalizada con código " + exitCode + " ---\n"));
+            } catch (Exception e) {
+                SwingUtilities.invokeLater(() -> showError("Error al ejecutar el programa: " + e.getMessage()));
+            }
+        }).start();
+    }
+
+    // Asegúrate de que el método parseAndDraw() también esté en tu clase IDE.java
+    private void parseAndDraw(String commandLine) {
+        outputArea.append(commandLine + "\n");
+        String[] parts = commandLine.split(":");
+        String command = parts[0].toUpperCase();
+
+        try {
+            switch (command) {
+                case "AVANZA":
+                    turtleCanvas.avanza(Integer.parseInt(parts[1]));
+                    break;
+                case "GIRADERECHA":
+                    turtleCanvas.giraDerecha(Integer.parseInt(parts[1]));
+                    break;
+                // Añade casos para GIRAIZQUIERDA, RETROCEDE...
+                case "SUBELAPIZ":
+                    turtleCanvas.setPenDown(false);
+                    break;
+                case "BAJALAPIZ":
+                    turtleCanvas.setPenDown(true);
+                    break;
+                case "COLOR":
+                    turtleCanvas.setPenColor(parts[1]);
+                    break;
+                case "PONPOS":
+                    turtleCanvas.ponPos(Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+                    break;
+                // Agrega aquí los demás comandos que tu tortuga virtual necesite
+            }
+        } catch (Exception e) {
+            System.err.println("No se pudo parsear el comando: " + commandLine);
         }
     }
     
