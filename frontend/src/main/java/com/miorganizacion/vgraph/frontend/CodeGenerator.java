@@ -253,10 +253,6 @@ public class CodeGenerator {
         if (expr instanceof PotenciaNode) return visitPotencia((PotenciaNode) expr);
         if (expr instanceof AzarNode) return visitAzar((AzarNode) expr);
 
-        // Operaciones Lógicas/Comparación
-        if (expr instanceof YLogicoNode) return visitLogicalOp((YLogicoNode) expr, "and");
-        if (expr instanceof OLogicoNode) return visitLogicalOp((OLogicoNode) expr, "or");
-
         return "0"; // Default
     }
 

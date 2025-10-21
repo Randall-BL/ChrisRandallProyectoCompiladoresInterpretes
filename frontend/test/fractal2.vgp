@@ -1,0 +1,44 @@
+Haz iter 30;
+Haz avancei 150;
+Haz reduccion 5;
+Haz giro 95;
+Haz i 0;
+
+bajalapiz;
+poncolorlapiz Azul;
+
+MIENTRAS (i < iter) [
+    # Dibujar un cuadrado (comandos separados por coma)
+    repite 4 [
+        avanza avancei,
+        giraderecha 90
+    ], # La coma separa 'repite' del siguiente comando
+
+    # --------------------------------------------------------------------
+    # LA SIGUIENTE LÍNEA NO ES VÁLIDA EN TU GRAMÁTICA ACTUAL
+    #avancei = (division avancei reduccion),
+    # --------------------------------------------------------------------
+
+    # Girar para la siguiente espiral
+    giraderecha giro,
+
+    # Estructura SI anidada y separada por comas
+    SI ((i % 5) == 0) [ poncolorlapiz Rojo ]
+    [
+        SI ((i % 5) == 1) [ poncolorlapiz Verde ]
+        [
+            SI ((i % 5) == 2) [ poncolorlapiz Azul ]
+            [
+                SI ((i % 5) == 3) [ poncolorlapiz Magenta ]
+                [
+                    poncolorlapiz Cyan
+                ]
+            ]
+        ]
+    ],
+
+    inc [i 1] # El último comando no necesita coma
+]; # El punto y coma va al final de toda la estructura MIENTRAS
+
+subelapiz;
+centro;
