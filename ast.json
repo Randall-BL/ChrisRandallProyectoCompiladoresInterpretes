@@ -2,39 +2,64 @@
   "type" : "Program",
   "statements" : [ {
     "type" : "Haz",
-    "identifier" : "iter",
+    "identifier" : "puntas",
     "expression" : {
       "type" : "IntLiteral",
-      "value" : 30
+      "value" : 5
     },
     "line" : 1,
     "column" : 0
   }, {
     "type" : "Haz",
-    "identifier" : "avancei",
+    "identifier" : "lado",
     "expression" : {
       "type" : "IntLiteral",
-      "value" : 150
+      "value" : 120
     },
     "line" : 2,
     "column" : 0
   }, {
     "type" : "Haz",
-    "identifier" : "reduccion",
+    "identifier" : "rotacion",
     "expression" : {
       "type" : "IntLiteral",
-      "value" : 5
+      "value" : 144
     },
     "line" : 3,
     "column" : 0
   }, {
     "type" : "Haz",
-    "identifier" : "giro",
+    "identifier" : "estrellas",
     "expression" : {
       "type" : "IntLiteral",
-      "value" : 95
+      "value" : 20
     },
-    "line" : 4,
+    "line" : 5,
+    "column" : 0
+  }, {
+    "type" : "Haz",
+    "identifier" : "angulo",
+    "expression" : {
+      "type" : "IntLiteral",
+      "value" : 360
+    },
+    "line" : 6,
+    "column" : 0
+  }, {
+    "type" : "Haz",
+    "identifier" : "angulo2",
+    "expression" : {
+      "type" : "Division",
+      "dividendo" : {
+        "type" : "VarRef",
+        "varName" : "angulo"
+      },
+      "divisor" : {
+        "type" : "VarRef",
+        "varName" : "estrellas"
+      }
+    },
+    "line" : 8,
     "column" : 0
   }, {
     "type" : "Haz",
@@ -43,17 +68,17 @@
       "type" : "IntLiteral",
       "value" : 0
     },
-    "line" : 5,
+    "line" : 10,
     "column" : 0
   }, {
     "type" : "BajaLapiz",
-    "line" : 7,
+    "line" : 12,
     "column" : 0
   }, {
     "type" : "PonColorLapiz",
-    "line" : 8,
+    "line" : 13,
     "column" : 0,
-    "colorName" : "Azul"
+    "colorName" : "Verde"
   }, {
     "type" : "Mientras",
     "condicion" : {
@@ -65,30 +90,30 @@
       "operator" : "<",
       "right" : {
         "type" : "VarRef",
-        "varName" : "iter"
+        "varName" : "estrellas"
       }
     },
     "instrucciones" : [ {
       "type" : "Repite",
       "veces" : {
-        "type" : "IntLiteral",
-        "value" : 4
+        "type" : "VarRef",
+        "varName" : "puntas"
       },
       "ordenes" : [ {
         "type" : "Avanza",
         "distance" : {
           "type" : "VarRef",
-          "varName" : "avancei"
+          "varName" : "lado"
         },
-        "line" : 13,
+        "line" : 18,
         "column" : 8
       }, {
         "type" : "GiraDerecha",
-        "line" : 14,
+        "line" : 19,
         "column" : 8,
         "angle" : {
-          "type" : "IntLiteral",
-          "value" : 90
+          "type" : "VarRef",
+          "varName" : "rotacion"
         }
       } ]
     }, {
@@ -97,7 +122,7 @@
       "column" : 4,
       "angle" : {
         "type" : "VarRef",
-        "varName" : "giro"
+        "varName" : "angulo2"
       }
     }, {
       "type" : "Si",
@@ -112,7 +137,7 @@
           },
           "right" : {
             "type" : "IntLiteral",
-            "value" : 5
+            "value" : 4
           }
         },
         "operator" : "==",
@@ -123,102 +148,93 @@
       },
       "instruccionesSi" : [ {
         "type" : "PonColorLapiz",
-        "line" : 26,
-        "column" : 24,
-        "colorName" : "Rojo"
-      } ],
-      "instruccionesSino" : [ {
-        "type" : "Si",
-        "condicion" : {
-          "type" : "Condition",
+        "line" : 27,
+        "column" : 25,
+        "colorName" : "Azul"
+      } ]
+    }, {
+      "type" : "Si",
+      "condicion" : {
+        "type" : "Condition",
+        "left" : {
+          "type" : "BinaryOp",
+          "operator" : "%",
           "left" : {
-            "type" : "BinaryOp",
-            "operator" : "%",
-            "left" : {
-              "type" : "VarRef",
-              "varName" : "i"
-            },
-            "right" : {
-              "type" : "IntLiteral",
-              "value" : 5
-            }
+            "type" : "VarRef",
+            "varName" : "i"
           },
-          "operator" : "==",
           "right" : {
             "type" : "IntLiteral",
-            "value" : 1
+            "value" : 4
           }
         },
-        "instruccionesSi" : [ {
-          "type" : "PonColorLapiz",
-          "line" : 28,
-          "column" : 28,
-          "colorName" : "Verde"
-        } ],
-        "instruccionesSino" : [ {
-          "type" : "Si",
-          "condicion" : {
-            "type" : "Condition",
-            "left" : {
-              "type" : "BinaryOp",
-              "operator" : "%",
-              "left" : {
-                "type" : "VarRef",
-                "varName" : "i"
-              },
-              "right" : {
-                "type" : "IntLiteral",
-                "value" : 5
-              }
-            },
-            "operator" : "==",
-            "right" : {
-              "type" : "IntLiteral",
-              "value" : 2
-            }
+        "operator" : "==",
+        "right" : {
+          "type" : "IntLiteral",
+          "value" : 1
+        }
+      },
+      "instruccionesSi" : [ {
+        "type" : "PonColorLapiz",
+        "line" : 28,
+        "column" : 24,
+        "colorName" : "Rojo"
+      } ]
+    }, {
+      "type" : "Si",
+      "condicion" : {
+        "type" : "Condition",
+        "left" : {
+          "type" : "BinaryOp",
+          "operator" : "%",
+          "left" : {
+            "type" : "VarRef",
+            "varName" : "i"
           },
-          "instruccionesSi" : [ {
-            "type" : "PonColorLapiz",
-            "line" : 30,
-            "column" : 32,
-            "colorName" : "Azul"
-          } ],
-          "instruccionesSino" : [ {
-            "type" : "Si",
-            "condicion" : {
-              "type" : "Condition",
-              "left" : {
-                "type" : "BinaryOp",
-                "operator" : "%",
-                "left" : {
-                  "type" : "VarRef",
-                  "varName" : "i"
-                },
-                "right" : {
-                  "type" : "IntLiteral",
-                  "value" : 5
-                }
-              },
-              "operator" : "==",
-              "right" : {
-                "type" : "IntLiteral",
-                "value" : 3
-              }
-            },
-            "instruccionesSi" : [ {
-              "type" : "PonColorLapiz",
-              "line" : 32,
-              "column" : 36,
-              "colorName" : "Magenta"
-            } ],
-            "instruccionesSino" : [ {
-              "type" : "PonColorLapiz",
-              "line" : 34,
-              "column" : 20,
-              "colorName" : "Cyan"
-            } ]
-          } ]
-        } ]
+          "right" : {
+            "type" : "IntLiteral",
+            "value" : 4
+          }
+        },
+        "operator" : "==",
+        "right" : {
+          "type" : "IntLiteral",
+          "value" : 2
+        }
+      },
+      "instruccionesSi" : [ {
+        "type" : "PonColorLapiz",
+        "line" : 29,
+        "column" : 24,
+        "colorName" : "Amarillo"
+      } ]
+    }, {
+      "type" : "Si",
+      "condicion" : {
+        "type" : "Condition",
+        "left" : {
+          "type" : "BinaryOp",
+          "operator" : "%",
+          "left" : {
+            "type" : "VarRef",
+            "varName" : "i"
+          },
+          "right" : {
+            "type" : "IntLiteral",
+            "value" : 4
+          }
+        },
+        "operator" : "==",
+        "right" : {
+          "type" : "IntLiteral",
+          "value" : 3
+        }
+      },
+      "instruccionesSi" : [ {
+        "type" : "PonColorLapiz",
+        "line" : 30,
+        "column" : 24,
+        "colorName" : "Verde"
       } ]
     }, {
       "type" : "Increment",
@@ -227,16 +243,16 @@
         "type" : "IntLiteral",
         "value" : 1
       },
-      "line" : 40,
+      "line" : 32,
       "column" : 4
     } ]
   }, {
     "type" : "SubeLapiz",
-    "line" : 43,
+    "line" : 35,
     "column" : 0
   }, {
     "type" : "Centro",
-    "line" : 44,
+    "line" : 36,
     "column" : 0
   } ]
 }

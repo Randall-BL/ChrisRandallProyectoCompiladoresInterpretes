@@ -125,10 +125,12 @@ public class IDE extends JFrame {
         runMenu.setMnemonic('E');
         JMenuItem runItem = new JMenuItem("Ejecutar análisis");
         JMenuItem runLastItem = new JMenuItem("Ejecutar último programa compilado");
+        JMenuItem viewASTItem = new JMenuItem("Ver AST");
         JMenuItem clearItem = new JMenuItem("Limpiar resultados");
         runMenu.add(runItem);
         runMenu.add(runLastItem);
         runMenu.addSeparator();
+        runMenu.add(viewASTItem);
         runMenu.add(clearItem);
 
         JMenu helpMenu = new JMenu("Ayuda");
@@ -149,6 +151,7 @@ public class IDE extends JFrame {
         exitItem.addActionListener(e -> System.exit(0));
         runItem.addActionListener(e -> runInterpreter());
         runLastItem.addActionListener(e -> runLastProgram());
+        viewASTItem.addActionListener(e -> showAST());
         clearItem.addActionListener(e -> clearResults());
         aboutItem.addActionListener(e -> showAbout());
 
@@ -451,6 +454,113 @@ public class IDE extends JFrame {
         errorArea.setText("");
     }
     
+    private void showAST() {
+        File astFile = new File("ast.png");
+        if (!astFile.exists()) {
+            showError("No se encontró el archivo ast.png.\nPrimero debes compilar un programa para generar el AST.");
+            return;
+        }
+
+        try {
+            // Cargar la imagen original como BufferedImage para mejor rendimiento
+            final java.awt.image.BufferedImage originalImage = javax.imageio.ImageIO.read(astFile);
+
+            // Clase interna para el panel con zoom
+            class ZoomablePanel extends JPanel {
+                private double scale = 1.0;
+
+                public void setScale(double scale) {
+                    this.scale = scale;
+                    revalidate();
+                    repaint();
+                }
+
+                public double getScale() {
+                    return scale;
+                }
+
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    Graphics2D g2d = (Graphics2D) g;
+
+                    // Activar renderizado de calidad
+                    g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                                        RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                    g2d.setRenderingHint(RenderingHints.KEY_RENDERING,
+                                        RenderingHints.VALUE_RENDER_QUALITY);
+                    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                                        RenderingHints.VALUE_ANTIALIAS_ON);
+
+                    // Aplicar transformación de escala
+                    g2d.scale(scale, scale);
+
+                    // Dibujar la imagen original (sin reescalar)
+                    g2d.drawImage(originalImage, 0, 0, null);
+                }
+
+                @Override
+                public Dimension getPreferredSize() {
+                    return new Dimension(
+                        (int)(originalImage.getWidth() * scale),
+                        (int)(originalImage.getHeight() * scale)
+                    );
+                }
+            }
+
+            ZoomablePanel imagePanel = new ZoomablePanel();
+            JScrollPane scrollPane = new JScrollPane(imagePanel);
+            scrollPane.setPreferredSize(new Dimension(800, 600));
+            scrollPane.getViewport().setBackground(Color.WHITE);
+
+            // Panel de información
+            JPanel infoPanel = new JPanel();
+            JLabel zoomLabel = new JLabel("100%");
+            JLabel instructionLabel = new JLabel("   💡 Usa CTRL + Rueda del ratón para hacer zoom");
+            instructionLabel.setForeground(new Color(100, 100, 100));
+            infoPanel.add(new JLabel("Zoom: "));
+            infoPanel.add(zoomLabel);
+            infoPanel.add(instructionLabel);
+
+            // Agregar MouseWheelListener para zoom con CTRL + Rueda
+            scrollPane.addMouseWheelListener(e -> {
+                if (e.isControlDown()) {
+                    e.consume(); // Evitar el scroll normal
+
+                    double currentScale = imagePanel.getScale();
+                    double zoomFactor = 1.1;
+
+                    if (e.getWheelRotation() < 0) {
+                        // Zoom In
+                        if (currentScale < 5.0) {
+                            currentScale *= zoomFactor;
+                        }
+                    } else {
+                        // Zoom Out
+                        if (currentScale > 0.1) {
+                            currentScale /= zoomFactor;
+                        }
+                    }
+
+                    imagePanel.setScale(currentScale);
+                    zoomLabel.setText(String.format("%.0f%%", currentScale * 100));
+                }
+            });
+
+            // Crear diálogo
+            JDialog astDialog = new JDialog(this, "Árbol de Sintaxis Abstracta (AST)", false);
+            astDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            astDialog.setLayout(new BorderLayout());
+            astDialog.add(infoPanel, BorderLayout.NORTH);
+            astDialog.add(scrollPane, BorderLayout.CENTER);
+            astDialog.pack();
+            astDialog.setLocationRelativeTo(this);
+            astDialog.setVisible(true);
+        } catch (Exception ex) {
+            showError("Error al cargar la imagen del AST: " + ex.getMessage());
+        }
+    }
+
     private void showAbout() {
         JOptionPane.showMessageDialog(this, 
             "VGraph IDE\nVersión 1.0\n\nUn entorno de desarrollo para el lenguaje VGraph",
