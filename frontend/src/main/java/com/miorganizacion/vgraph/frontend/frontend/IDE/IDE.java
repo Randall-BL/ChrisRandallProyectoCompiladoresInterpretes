@@ -124,8 +124,11 @@ public class IDE extends JFrame {
         JMenu runMenu = new JMenu("Ejecutar");
         runMenu.setMnemonic('E');
         JMenuItem runItem = new JMenuItem("Ejecutar análisis");
+        JMenuItem runLastItem = new JMenuItem("Ejecutar último programa compilado");
         JMenuItem clearItem = new JMenuItem("Limpiar resultados");
         runMenu.add(runItem);
+        runMenu.add(runLastItem);
+        runMenu.addSeparator();
         runMenu.add(clearItem);
 
         JMenu helpMenu = new JMenu("Ayuda");
@@ -145,6 +148,7 @@ public class IDE extends JFrame {
         saveAsItem.addActionListener(e -> saveFile(true));
         exitItem.addActionListener(e -> System.exit(0));
         runItem.addActionListener(e -> runInterpreter());
+        runLastItem.addActionListener(e -> runLastProgram());
         clearItem.addActionListener(e -> clearResults());
         aboutItem.addActionListener(e -> showAbout());
 
@@ -275,7 +279,7 @@ public class IDE extends JFrame {
         // PASO 3: Compilar el Backend (LLVM IR -> Ejecutable)
         // ---------------------------------------------------------------
         outputArea.append("\nCompilando el backend a un ejecutable...\n");
-        boolean compilationSuccess = Main.compileLLVM("output.ll", "mi_programa.exe");
+        boolean compilationSuccess = Main.compileLLVM("output.ll", "archivoObjeto.exe");
 
         if (!compilationSuccess) {
             errorArea.setText("Error durante la compilación del backend. Revisa la consola del IDE para más detalles.");
@@ -283,7 +287,13 @@ public class IDE extends JFrame {
             return;
         }
 
-        outputArea.append("¡Compilación de Backend exitosa! Ejecutable 'mi_programa' creado.\n\n");
+        outputArea.append("¡Compilación de Backend exitosa!\n");
+
+        // Generar script wrapper para ejecución directa
+        generateExecutableWrapper();
+        outputArea.append("✅ Archivos generados:\n");
+        outputArea.append("   - archivoObjeto.exe (ejecutable LLVM)\n");
+        outputArea.append("   - archivoObjeto.bat (ejecutar para ver dibujo)\n\n");
         outputArea.append("--- Salida del Programa ---\n");
 
         // ---------------------------------------------------------------
@@ -291,7 +301,7 @@ public class IDE extends JFrame {
         // ---------------------------------------------------------------
         new Thread(() -> {
             try {
-                ProcessBuilder pb = new ProcessBuilder("./mi_programa");
+                ProcessBuilder pb = new ProcessBuilder("./archivoObjeto.exe");
                 Process process = pb.start();
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                     String line;
@@ -302,7 +312,19 @@ public class IDE extends JFrame {
                     }
                 }
                 int exitCode = process.waitFor();
-                SwingUtilities.invokeLater(() -> outputArea.append("--- Ejecución finalizada con código " + exitCode + " ---\n"));
+                SwingUtilities.invokeLater(() -> {
+                    outputArea.append("--- Ejecución finalizada con código " + exitCode + " ---\n");
+
+                    // Guardar imagen automáticamente si la ejecución fue exitosa
+                    if (exitCode == 0) {
+                        try {
+                            turtleCanvas.saveImage();
+                            outputArea.append("💾 Imagen guardada exitosamente en ResultadosDibujos/\n");
+                        } catch (IOException ex) {
+                            outputArea.append("⚠️ No se pudo guardar la imagen: " + ex.getMessage() + "\n");
+                        }
+                    }
+                });
             } catch (Exception e) {
                 SwingUtilities.invokeLater(() -> showError("Error al ejecutar el programa: " + e.getMessage()));
             }
@@ -343,6 +365,87 @@ public class IDE extends JFrame {
         }
     }
     
+    private void generateExecutableWrapper() {
+        try {
+            // Crear script wrapper simple archivoObjeto.bat
+            String batContent = "@echo off\r\n" +
+                "REM Wrapper para ejecutar el programa con visualización\r\n" +
+                "java -cp frontend\\target\\classes com.miorganizacion.vgraph.frontend.ProgramRunner archivoObjeto.exe\r\n";
+
+            Files.write(Paths.get("archivoObjeto.bat"), batContent.getBytes());
+
+        } catch (IOException e) {
+            System.err.println("No se pudo generar el wrapper: " + e.getMessage());
+        }
+    }
+
+    private void runLastProgram() {
+        File executable = new File("archivoObjeto.exe");
+        if (!executable.exists()) {
+            showError("No se encontró el ejecutable compilado.\nPrimero debes compilar un programa.");
+            return;
+        }
+
+        outputArea.setText("");
+        errorArea.setText("");
+        turtleCanvas.resetTurtle();
+        outputArea.append("Ejecutando último programa compilado...\n");
+        outputArea.append("--- Salida del Programa ---\n");
+
+        // Ejecutar en un hilo separado
+        new Thread(() -> {
+            try {
+                ProcessBuilder pb = new ProcessBuilder("./archivoObjeto.exe");
+                pb.redirectErrorStream(true);
+                Process process = pb.start();
+
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        final String currentLine = line;
+                        SwingUtilities.invokeLater(() -> parseAndDraw(currentLine));
+
+                        // Pequeña pausa para visualizar el dibujo progresivamente
+                        Thread.sleep(10);
+                    }
+                }
+
+                int exitCode = process.waitFor();
+                SwingUtilities.invokeLater(() -> {
+                    outputArea.append("--- Ejecución finalizada con código " + exitCode + " ---\n");
+
+                    // Guardar y mostrar imagen si fue exitoso
+                    if (exitCode == 0) {
+                        try {
+                            turtleCanvas.saveImage();
+                            outputArea.append("💾 Imagen guardada exitosamente en ResultadosDibujos/\n");
+
+                            // Cambiar a la pestaña del lienzo para mostrar el resultado
+                            JTabbedPane mainDisplay = (JTabbedPane) turtleCanvas.getParent().getParent().getParent();
+                            mainDisplay.setSelectedIndex(1); // Seleccionar pestaña "Lienzo de Tortuga"
+
+                            JOptionPane.showMessageDialog(IDE.this,
+                                "✅ Programa ejecutado exitosamente\n💾 Imagen guardada en ResultadosDibujos/",
+                                "Ejecución Completada",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        } catch (IOException ex) {
+                            outputArea.append("⚠️ No se pudo guardar la imagen: " + ex.getMessage() + "\n");
+                        }
+                    } else {
+                        errorArea.setText("El programa terminó con errores (código: " + exitCode + ")");
+                        tabbedPane.setSelectedIndex(1);
+                    }
+                });
+            } catch (Exception e) {
+                SwingUtilities.invokeLater(() -> {
+                    showError("Error al ejecutar el programa: " + e.getMessage());
+                    errorArea.setText("Error: " + e.getMessage());
+                    tabbedPane.setSelectedIndex(1);
+                });
+            }
+        }).start();
+    }
+
     private void clearResults() {
         outputArea.setText("");
         errorArea.setText("");

@@ -4,8 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.imageio.ImageIO;
 
 public class TurtlePanel extends JPanel {
     private double turtleX, turtleY;
@@ -25,12 +31,17 @@ public class TurtlePanel extends JPanel {
 
     public TurtlePanel() {
         setBackground(Color.WHITE);
+        setPreferredSize(new Dimension(800, 600));
         resetTurtle();
     }
 
     public void resetTurtle() {
-        this.turtleX = getWidth() / 2.0;
-        this.turtleY = getHeight() / 2.0;
+        // Si el panel aún no tiene dimensiones, usar valores por defecto
+        int width = getWidth() > 0 ? getWidth() : 800;
+        int height = getHeight() > 0 ? getHeight() : 600;
+
+        this.turtleX = width / 2.0;
+        this.turtleY = height / 2.0;
         this.angle = 90.0; // Apuntando hacia arriba
         this.isPenDown = true;
         this.penColor = Color.BLACK;
@@ -120,5 +131,38 @@ public class TurtlePanel extends JPanel {
         this.turtleX = x;
         this.turtleY = y;
         repaint();
+    }
+
+    /**
+     * Guarda la imagen actual del panel en la carpeta ResultadosDibujos.
+     * Crea la carpeta si no existe y genera nombres únicos con timestamp.
+     */
+    public void saveImage() throws IOException {
+        // Crear directorio si no existe
+        File dir = new File("ResultadosDibujos");
+        if (!dir.exists()) {
+            if (!dir.mkdirs()) {
+                throw new IOException("No se pudo crear el directorio ResultadosDibujos");
+            }
+        }
+
+        // Generar nombre con timestamp
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String filename = "dibujo_" + timestamp + ".png";
+        File outputFile = new File(dir, filename);
+
+        // Crear imagen del panel
+        BufferedImage image = new BufferedImage(
+            getWidth(),
+            getHeight(),
+            BufferedImage.TYPE_INT_RGB
+        );
+        Graphics2D g2d = image.createGraphics();
+        paint(g2d);
+        g2d.dispose();
+
+        // Guardar imagen
+        ImageIO.write(image, "png", outputFile);
+        System.out.println("Imagen guardada en: " + outputFile.getAbsolutePath());
     }
 }
