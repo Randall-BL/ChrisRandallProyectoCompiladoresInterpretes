@@ -1,0 +1,36 @@
+Haz puntas 5; # Número de puntas de la estrella (5 para una estrella estándar)
+Haz lado 120; # Longitud de cada segmento de la estrella
+Haz rotacion 144; # Ángulo para dibujar una estrella de 5 puntas (360/5 * 2)
+
+Haz estrellas 20; # Cuántas estrellas dibujar en total
+Haz angulo 360; # El giro total antes de que se repita el patrón (e.g., 360)
+
+Haz angulo2 (division angulo estrellas); # Cuánto girar entre cada estrella
+
+Haz i 0;
+
+bajalapiz;
+poncolorlapiz Verde; # Color inicial
+
+MIENTRAS (i < estrellas) [
+    # Dibujar una estrella
+    repite puntas [
+        avanza lado,
+        giraderecha rotacion
+    ],
+
+    # Girar la tortuga para la siguiente estrella
+    giraderecha angulo2,
+
+    # Pequeño cambio de tamaño o color para el efecto (opcional)
+    # Haz tamaño_lado (division tamaño_lado 1.05); # Si quieres que las estrellas se hagan más pequeñas
+    SI ( (i % 4) ==  0) [poncolorlapiz Azul],
+    SI ( (i % 4) == 1) [poncolorlapiz Rojo],
+    SI ( (i % 4) == 2) [poncolorlapiz Amarillo],
+    SI ( (i % 4) == 3) [poncolorlapiz Verde],
+
+    inc [i 1]
+];
+
+subelapiz;
+centro;

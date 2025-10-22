@@ -2,44 +2,241 @@
   "type" : "Program",
   "statements" : [ {
     "type" : "Haz",
-    "identifier" : "contador",
+    "identifier" : "iter",
     "expression" : {
       "type" : "IntLiteral",
-      "value" : 0
+      "value" : 30
     },
     "line" : 1,
     "column" : 0
   }, {
     "type" : "Haz",
-    "identifier" : "limite",
+    "identifier" : "avancei",
+    "expression" : {
+      "type" : "IntLiteral",
+      "value" : 150
+    },
+    "line" : 2,
+    "column" : 0
+  }, {
+    "type" : "Haz",
+    "identifier" : "reduccion",
     "expression" : {
       "type" : "IntLiteral",
       "value" : 5
     },
-    "line" : 2,
-    "column" : 8
+    "line" : 3,
+    "column" : 0
+  }, {
+    "type" : "Haz",
+    "identifier" : "giro",
+    "expression" : {
+      "type" : "IntLiteral",
+      "value" : 95
+    },
+    "line" : 4,
+    "column" : 0
+  }, {
+    "type" : "Haz",
+    "identifier" : "i",
+    "expression" : {
+      "type" : "IntLiteral",
+      "value" : 0
+    },
+    "line" : 5,
+    "column" : 0
+  }, {
+    "type" : "BajaLapiz",
+    "line" : 7,
+    "column" : 0
+  }, {
+    "type" : "PonColorLapiz",
+    "line" : 8,
+    "column" : 0,
+    "colorName" : "Azul"
   }, {
     "type" : "Mientras",
     "condicion" : {
       "type" : "Condition",
       "left" : {
         "type" : "VarRef",
-        "varName" : "contador"
+        "varName" : "i"
       },
       "operator" : "<",
       "right" : {
         "type" : "VarRef",
-        "varName" : "limite"
+        "varName" : "iter"
       }
     },
     "instrucciones" : [ {
-      "type" : "Avanza",
-      "distance" : {
+      "type" : "Repite",
+      "veces" : {
         "type" : "IntLiteral",
-        "value" : 10
+        "value" : 4
       },
-      "line" : 5,
-      "column" : 12
+      "ordenes" : [ {
+        "type" : "Avanza",
+        "distance" : {
+          "type" : "VarRef",
+          "varName" : "avancei"
+        },
+        "line" : 13,
+        "column" : 8
+      }, {
+        "type" : "GiraDerecha",
+        "line" : 14,
+        "column" : 8,
+        "angle" : {
+          "type" : "IntLiteral",
+          "value" : 90
+        }
+      } ]
+    }, {
+      "type" : "GiraDerecha",
+      "line" : 23,
+      "column" : 4,
+      "angle" : {
+        "type" : "VarRef",
+        "varName" : "giro"
+      }
+    }, {
+      "type" : "Si",
+      "condicion" : {
+        "type" : "Condition",
+        "left" : {
+          "type" : "BinaryOp",
+          "operator" : "%",
+          "left" : {
+            "type" : "VarRef",
+            "varName" : "i"
+          },
+          "right" : {
+            "type" : "IntLiteral",
+            "value" : 5
+          }
+        },
+        "operator" : "==",
+        "right" : {
+          "type" : "IntLiteral",
+          "value" : 0
+        }
+      },
+      "instruccionesSi" : [ {
+        "type" : "PonColorLapiz",
+        "line" : 26,
+        "column" : 24,
+        "colorName" : "Rojo"
+      } ],
+      "instruccionesSino" : [ {
+        "type" : "Si",
+        "condicion" : {
+          "type" : "Condition",
+          "left" : {
+            "type" : "BinaryOp",
+            "operator" : "%",
+            "left" : {
+              "type" : "VarRef",
+              "varName" : "i"
+            },
+            "right" : {
+              "type" : "IntLiteral",
+              "value" : 5
+            }
+          },
+          "operator" : "==",
+          "right" : {
+            "type" : "IntLiteral",
+            "value" : 1
+          }
+        },
+        "instruccionesSi" : [ {
+          "type" : "PonColorLapiz",
+          "line" : 28,
+          "column" : 28,
+          "colorName" : "Verde"
+        } ],
+        "instruccionesSino" : [ {
+          "type" : "Si",
+          "condicion" : {
+            "type" : "Condition",
+            "left" : {
+              "type" : "BinaryOp",
+              "operator" : "%",
+              "left" : {
+                "type" : "VarRef",
+                "varName" : "i"
+              },
+              "right" : {
+                "type" : "IntLiteral",
+                "value" : 5
+              }
+            },
+            "operator" : "==",
+            "right" : {
+              "type" : "IntLiteral",
+              "value" : 2
+            }
+          },
+          "instruccionesSi" : [ {
+            "type" : "PonColorLapiz",
+            "line" : 30,
+            "column" : 32,
+            "colorName" : "Azul"
+          } ],
+          "instruccionesSino" : [ {
+            "type" : "Si",
+            "condicion" : {
+              "type" : "Condition",
+              "left" : {
+                "type" : "BinaryOp",
+                "operator" : "%",
+                "left" : {
+                  "type" : "VarRef",
+                  "varName" : "i"
+                },
+                "right" : {
+                  "type" : "IntLiteral",
+                  "value" : 5
+                }
+              },
+              "operator" : "==",
+              "right" : {
+                "type" : "IntLiteral",
+                "value" : 3
+              }
+            },
+            "instruccionesSi" : [ {
+              "type" : "PonColorLapiz",
+              "line" : 32,
+              "column" : 36,
+              "colorName" : "Magenta"
+            } ],
+            "instruccionesSino" : [ {
+              "type" : "PonColorLapiz",
+              "line" : 34,
+              "column" : 20,
+              "colorName" : "Cyan"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "type" : "Increment",
+      "identifier" : "i",
+      "byValue" : {
+        "type" : "IntLiteral",
+        "value" : 1
+      },
+      "line" : 40,
+      "column" : 4
     } ]
+  }, {
+    "type" : "SubeLapiz",
+    "line" : 43,
+    "column" : 0
+  }, {
+    "type" : "Centro",
+    "line" : 44,
+    "column" : 0
   } ]
 }
