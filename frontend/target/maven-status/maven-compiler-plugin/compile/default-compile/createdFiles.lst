@@ -22,6 +22,7 @@ com\miorganizacion\vgraph\frontend\CodeGenerator$SymbolInfo.class
 com\miorganizacion\vgraph\frontend\VGraphParser$MoveRetrocedeSinPCContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$TurtleMoveStmtSinPCContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$HastaStmtContext.class
+com\miorganizacion\vgraph\frontend\ProgramLauncher.class
 com\miorganizacion\vgraph\frontend\VGraphParser$StmtRepiteContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$TurtleStateStmtSinPCContext.class
 com\miorganizacion\vgraph\frontend\ast\SumaNode.class
@@ -68,6 +69,7 @@ com\miorganizacion\vgraph\frontend\VGraphParser$HazMientrasStmtSinPCContext.clas
 com\miorganizacion\vgraph\frontend\ast\HazMientrasNode.class
 com\miorganizacion\vgraph\frontend\frontend\IDE\IDE$1.class
 com\miorganizacion\vgraph\frontend\ast\YLogicoNode.class
+com\miorganizacion\vgraph\frontend\ProgramRunner.class
 com\miorganizacion\vgraph\frontend\VGraphParser$StatePenDownContext.class
 com\miorganizacion\vgraph\frontend\ast\EsperaNode.class
 com\miorganizacion\vgraph\frontend\VGraphParser$VarContext.class
