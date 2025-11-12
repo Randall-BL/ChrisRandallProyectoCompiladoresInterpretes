@@ -103,6 +103,7 @@ com\miorganizacion\vgraph\frontend\VGraphParser$MenorqueContext.class
 com\miorganizacion\vgraph\frontend\VGraphParser$PosSetXContext.class
 com\miorganizacion\vgraph\frontend\ast\BinaryOpNode.class
 com\miorganizacion\vgraph\frontend\VGraphParser$MayorqueContext.class
+com\miorganizacion\vgraph\frontend\frontend\IDE\IDE$1ZoomablePanel.class
 com\miorganizacion\vgraph\frontend\ast\AssignmentNode.class
 com\miorganizacion\vgraph\frontend\ast\DrawLineNode.class
 com\miorganizacion\vgraph\frontend\ast\PotenciaNode.class
