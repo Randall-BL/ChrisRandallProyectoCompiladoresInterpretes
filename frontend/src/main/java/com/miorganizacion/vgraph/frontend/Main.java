@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Main {
 
     public static String run(String filePath) {
@@ -51,6 +52,14 @@ public class Main {
                 return errors.toString();
             }
 
+            // Generación de Código Intermedio (LLVM IR)
+            CodeGenerator codeGen = new CodeGenerator();
+            String llvmIrCode = codeGen.generate(program);
+
+            try (java.io.FileWriter writer = new java.io.FileWriter("output.ll")) {
+                writer.write(llvmIrCode);
+            }
+
             ObjectMapper mapper = new ObjectMapper();
             ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
             writer.writeValue(new File("ast.json"), program);
@@ -76,6 +85,44 @@ public class Main {
                                int line, int charPositionInLine,
                                String msg, RecognitionException e) {
             errors.add(String.format("Línea %d:%d - %s", line, charPositionInLine, msg));
+        }
+    }
+
+    public static boolean compileLLVM(String llFilePath, String outputExePath) {
+        try {
+            // Paso 1: llc - Compila .ll a .o (archivo objeto)
+            ProcessBuilder llcBuilder = new ProcessBuilder(
+                    "llc", "-filetype=obj", llFilePath, "-o", "output.o"
+            );
+            Process llcProcess = llcBuilder.start();
+            if (llcProcess.waitFor() != 0) {
+                try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(llcProcess.getErrorStream()))) {
+                    System.err.println("Error durante la compilación con llc:");
+                    reader.lines().forEach(System.err::println);
+                }
+                return false;
+            }
+
+            // Paso 2: clang - Enlaza el .o para crear el ejecutable
+            ProcessBuilder clangBuilder = new ProcessBuilder(
+                    "clang", "output.o", "-o", outputExePath
+            );
+            Process clangProcess = clangBuilder.start();
+            if (clangProcess.waitFor() != 0) {
+                try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(clangProcess.getErrorStream()))) {
+                    System.err.println("Error durante el enlazado con clang:");
+                    reader.lines().forEach(System.err::println);
+                }
+                return false;
+            }
+
+            // Limpia el archivo intermedio
+            new java.io.File("output.o").delete();
+
+            return true;
+        } catch (java.io.IOException | InterruptedException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }
