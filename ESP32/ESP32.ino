@@ -18,8 +18,8 @@ WebServer server(80);
 #define ENB 33  // PWM Motor B (Dirección derecha/izquierda)
 
 // Servo
-#define SERVO_PIN 4
-Servo servoMotor;
+#define SERVO_PIN 2  // Cambiar a pin 4 (más estable para servos)
+Servo miServo;
 
 // Almacenamiento de comandos
 const int MAX_COMMANDS = 500;
@@ -31,11 +31,16 @@ int currentCommand = 0;
 int currentColor = 90; // Azul por defecto
 
 // Configuración PWM
-const int SPEED_A = 150;  // Velocidad fija motor A (adelante/atrás)
+const int SPEED_A = 150;  // Velocidad fija motor A (adelante/atrás) - aumentada
 const int SPEED_B = 255;  // Velocidad máxima motor B (derecha/izquierda)
 
 // Constante para el giro
-const int Giro = 50;
+const int Giro = 55;
+const int SubGiros = 4; 
+
+// Configuración PWM
+const int PWM_FREQ = 1000;  // Reducir frecuencia para más potencia (antes 5000)
+const int PWM_RESOLUTION = 8;
 
 void setup() {
   setCpuFrequencyMhz(80);  // Reducir de 240MHz a 80MHz
@@ -46,18 +51,18 @@ void setup() {
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
-  pinMode(ENA, OUTPUT);
-  pinMode(ENB, OUTPUT);
   
-  // Configurar PWM
-  analogWrite(ENA, 0);
-  analogWrite(ENB, 0); // Siempre al máximo
-  
-  // Configurar servo
-  servoMotor.attach(SERVO_PIN);
-  servoMotor.write(currentColor);
+  // Configurar servo primero (librería maneja PWM internamente)
+  miServo.attach(SERVO_PIN);
+  miServo.write(currentColor);
   delay(500);
-  servoMotor.detach();  // Desconectar servo cuando no se usa para ahorrar energía
+  
+  // Configurar canales PWM para los motores
+  ledcAttach(ENA, PWM_FREQ, PWM_RESOLUTION);
+  ledcWrite(ENA, 0);
+  
+  ledcAttach(ENB, PWM_FREQ, PWM_RESOLUTION);
+  ledcWrite(ENB, 0);
   
   // Crear Access Point
   WiFi.setTxPower(WIFI_POWER_11dBm);  // Reducir potencia de transmisión
@@ -192,11 +197,11 @@ void executeCommand(String cmd) {
     changeColor(value);
   }
   else if (command == "SUBELAPIZ") {
-    servoMotor.write(85);
+    miServo.write(85);
     delay(500);
   }
   else if (command == "BAJALAPIZ") {
-    servoMotor.write(currentColor);
+    miServo.write(currentColor);
     delay(500);
   }
   else if (command == "ESPERA") {
@@ -214,8 +219,8 @@ void moveForward(int distance) {
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
   
-  analogWrite(ENA, SPEED_A);
-  analogWrite(ENB, 0);
+  ledcWrite(ENA, SPEED_A);
+  ledcWrite(ENB, 0);
   
   delay(duration);
   stopMotors();
@@ -231,8 +236,8 @@ void moveBackward(int distance) {
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
   
-  analogWrite(ENA, SPEED_A);
-  analogWrite(ENB, 0);
+  ledcWrite(ENA, SPEED_A);
+  ledcWrite(ENB, 0);
   
   delay(duration);
   stopMotors();
@@ -240,34 +245,36 @@ void moveBackward(int distance) {
 
 void turnRight(int angle) {
   int duration = (angle * Giro); // Calibración necesaria
-  int halfDuration = duration / 2;
+  int SubDuration = duration / SubGiros;
   
-  // Primera mitad: adelante girando a la derecha
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  analogWrite(ENA, SPEED_A);
-  
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
-  analogWrite(ENB, SPEED_B);
-  
-  unsigned long startTime = millis();
-  while (millis() - startTime < halfDuration) {
-    delay(10);
-  }
-  
-  // Segunda mitad: atrás girando a la derecha
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  analogWrite(ENA, SPEED_A);
-  
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
-  analogWrite(ENB, SPEED_B);
-  
-  startTime = millis();
-  while (millis() - startTime < halfDuration) {
-    delay(10);
+  for (int i = SubGiros/2; i >= 0; i--) {
+    // Primera mitad: adelante girando a la derecha
+    digitalWrite(IN1, HIGH);
+    digitalWrite(IN2, LOW);
+    ledcWrite(ENA, SPEED_A);
+    
+    digitalWrite(IN3, HIGH);
+    digitalWrite(IN4, LOW);
+    ledcWrite(ENB, SPEED_B);
+    
+    unsigned long startTime = millis();
+    while (millis() - startTime < SubDuration) {
+      delay(10);
+    }
+    
+    // Segunda mitad: atrás girando a la derecha
+    digitalWrite(IN1, LOW);
+    digitalWrite(IN2, HIGH);
+    ledcWrite(ENA, SPEED_A);
+    
+    digitalWrite(IN3, LOW);
+    digitalWrite(IN4, HIGH);
+    ledcWrite(ENB, SPEED_B);
+    
+    startTime = millis();
+    while (millis() - startTime < SubDuration) {
+      delay(10);
+    }
   }
   
   stopMotors();
@@ -275,36 +282,38 @@ void turnRight(int angle) {
 
 void turnLeft(int angle) {
   int duration = (angle * Giro);
-  int halfDuration = duration / 2;
+  int SubDuration = duration / SubGiros;
   
-  // Primera mitad: adelante girando a la izquierda
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  analogWrite(ENA, SPEED_A);
+  for (int i = SubGiros/2; i >= 0; i--) {
   
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
-  analogWrite(ENB, SPEED_B);
-  
-  unsigned long startTime = millis();
-  while (millis() - startTime < halfDuration) {
-    delay(10);
+    // Primera mitad: adelante girando a la izquierda
+    digitalWrite(IN1, HIGH);
+    digitalWrite(IN2, LOW);
+    ledcWrite(ENA, SPEED_A);
+    
+    digitalWrite(IN3, LOW);
+    digitalWrite(IN4, HIGH);
+    ledcWrite(ENB, SPEED_B);
+    
+    unsigned long startTime = millis();
+    while (millis() - startTime < SubDuration) {
+      delay(10);
+    }
+    
+    // Segunda mitad: atrás girando a la izquierda
+    digitalWrite(IN1, LOW);
+    digitalWrite(IN2, HIGH);
+    ledcWrite(ENA, SPEED_A);
+    
+    digitalWrite(IN3, HIGH);
+    digitalWrite(IN4, LOW);
+    ledcWrite(ENB, SPEED_B);
+    
+    startTime = millis();
+    while (millis() - startTime < SubDuration) {
+      delay(10);
+    }
   }
-  
-  // Segunda mitad: atrás girando a la izquierda
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  analogWrite(ENA, SPEED_A);
-  
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
-  analogWrite(ENB, SPEED_B);
-  
-  startTime = millis();
-  while (millis() - startTime < halfDuration) {
-    delay(10);
-  }
-  
   stopMotors();
 }
 
@@ -313,25 +322,25 @@ void stopMotors() {
   digitalWrite(IN2, LOW);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, LOW);
-  analogWrite(ENA, 0);
-  analogWrite(ENB, 0);  // Asegurar que ambos PWM estén en 0
+  ledcWrite(ENA, 0);
+  ledcWrite(ENB, 0);  // Asegurar que ambos PWM estén en 0
 }
 
 void changeColor(String color) {
   color.toLowerCase();
   
-  if (color == "cafe" || color == "marron") {
-    currentColor = 75;
+  if (color == "negro") {
+    currentColor = 105;
   }
   else if (color == "azul") {
     currentColor = 90;
   }
   else if (color == "amarillo") {
-    currentColor = 105;
+    currentColor = 75;
   }
   
-  servoMotor.attach(SERVO_PIN);  // Conectar solo cuando se usa
-  servoMotor.write(currentColor);
+  //miServo.attach(SERVO_PIN);  // Conectar solo cuando se usa
+  miServo.write(currentColor);
   delay(500);
-  servoMotor.detach();  // Desconectar para ahorrar energía
+  //miServo.detach();  // Desconectar para ahorrar energía
 }
