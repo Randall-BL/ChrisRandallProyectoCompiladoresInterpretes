@@ -28,13 +28,12 @@ public class SemanticAnalyzer {
             HazNode var = (HazNode) node;
             String id = var.getIdentifier();
 
-            // El tipo se infiere, así que lo analizaremos después.
-            // Por ahora, solo declaramos el símbolo.
             if (table.isDeclared(id)) {
                 addError(var, "La variable '" + id + "' ya está declarada (solo se puede usar 'Haz' una vez por variable)");
             } else {
-                // Declaramos con un tipo provisional, la segunda pasada lo corregirá.
-                table.declare(id, SymbolTable.Type.UNKNOWN);
+                // CORRECCIÓN: Usar getExpression() del HazNode
+                SymbolTable.Type inferredType = inferType(var.getExpression());
+                table.declare(id, inferredType);
             }
         }
 
@@ -61,13 +60,13 @@ public class SemanticAnalyzer {
         else if (node instanceof IfNode) {
             IfNode iff = (IfNode) node;
             collectDeclarations(iff.getCondition());
-            
+
             // Corregido: Acceder a los statements a través del BlockNode
             BlockNode thenBlock = (BlockNode) iff.getThenBlock();
             for (ASTNode child : thenBlock.getStatements()) {
                 collectDeclarations(child);
             }
-            
+
             if (iff.getElseBlock() != null) {
                 BlockNode elseBlock = (BlockNode) iff.getElseBlock();
                 for (ASTNode child : elseBlock.getStatements()) {
@@ -75,8 +74,55 @@ public class SemanticAnalyzer {
                 }
             }
         }
-        // Otros nodos (Draw*, SetColor, Wait, Assignment, etc.) no declaran vars
+        else if (node instanceof RepiteNode) {
+            RepiteNode repite = (RepiteNode) node;
+            for (ASTNode orden : repite.getOrdenes()) {
+                collectDeclarations(orden);
+            }
+        }
+        else if (node instanceof EjecutaNode) {
+            EjecutaNode ejecuta = (EjecutaNode) node;
+            for (ASTNode orden : ejecuta.getOrdenes()) {
+                collectDeclarations(orden);
+            }
+        }
+        else if (node instanceof SiNode) {
+            SiNode si = (SiNode) node;
+            for (ASTNode instruccion : si.getInstruccionesSi()) {
+                collectDeclarations(instruccion);
+            }
+            if (si.tieneElse()) {
+                for (ASTNode instruccion : si.getInstruccionesSino()) {
+                    collectDeclarations(instruccion);
+                }
+            }
+        }
+        else if (node instanceof HazHastaNode) {
+            HazHastaNode hazHasta = (HazHastaNode) node;
+            for (ASTNode instruccion : hazHasta.getInstrucciones()) {
+                collectDeclarations(instruccion);
+            }
+        }
+        else if (node instanceof HastaNode) {
+            HastaNode hasta = (HastaNode) node;
+            for (ASTNode instruccion : hasta.getInstrucciones()) {
+                collectDeclarations(instruccion);
+            }
+        }
+        else if (node instanceof HazMientrasNode) {
+            HazMientrasNode hazMientras = (HazMientrasNode) node;
+            for (ASTNode instruccion : hazMientras.getInstrucciones()) {
+                collectDeclarations(instruccion);
+            }
+        }
+        else if (node instanceof MientrasNode) {
+            MientrasNode mientras = (MientrasNode) node;
+            for (ASTNode instruccion : mientras.getInstrucciones()) {
+                collectDeclarations(instruccion);
+            }
+        }
     }
+
 
     // Despacha nodos para análisis semántico; ignora VarDeclarationNode
     private void visit(ASTNode node) {
@@ -166,8 +212,14 @@ public class SemanticAnalyzer {
         }
         else if (node instanceof VarReferenceNode) {
             String varName = ((VarReferenceNode) node).getVarName();
+
+            // CORRECCIÓN: Verificar si la variable existe antes de obtener su tipo
+            if (!table.isDeclared(varName)) {
+                return SymbolTable.Type.UNKNOWN;
+            }
+
             return table.getType(varName);
-        } 
+        }
         else if (node instanceof FunctionCallNode || node instanceof BinaryOpNode) {
             return SymbolTable.Type.NUMBER;
         }
@@ -422,10 +474,18 @@ public class SemanticAnalyzer {
     private void visitPonColorLapiz(PonColorLapizNode node) {
         String color = node.getColorName().toLowerCase();
 
-        if (!color.equals("negro") && !color.equals("azul") && !color.equals("rojo")) {
-            addError(node, "Color no válido: '" + node.getColorName() + "'. Los colores permitidos son Negro, Azul, Rojo.");
+        // Lista de colores permitidos según VGraph.g4
+        Set<String> coloresPermitidos = new HashSet<>(Arrays.asList(
+                "rojo", "verde", "azul", "amarillo",
+                "cyan", "magenta", "blanco", "negro"
+        ));
+
+        if (!coloresPermitidos.contains(color)) {
+            addError(node, "Color no válido: '" + node.getColorName() + "'. Los colores permitidos son: Rojo, Verde, Azul, Amarillo, Cyan, Magenta, Blanco, Negro.");
         }
     }
+
+
 
     private void visitPonPos(PonPosNode node) {
         checkIsNumber(node.getX(), "ponpos (coordenada X)");

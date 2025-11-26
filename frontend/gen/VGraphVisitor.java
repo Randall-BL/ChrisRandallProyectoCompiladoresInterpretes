@@ -1,4 +1,4 @@
-// Generated from C:/Users/YITAN/OneDrive/Escritorio/Compi/ChrisRandallProyectoCompiladoresInterpretes/frontend/src/main/antlr4/com/miorganizacion/vgraph/frontend/VGraph.g4 by ANTLR 4.13.2
+// Generated from E:/tec/2025/iisem/Compiladores E Interpetres/Proyecto/ChrisRandallProyectoCompiladoresInterpretes/frontend/src/main/antlr4/com/miorganizacion/vgraph/frontend/VGraph.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -22,6 +22,13 @@ public interface VGraphVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStmtVar(VGraphParser.StmtVarContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code StmtAssign}
+	 * labeled alternative in {@link VGraphParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStmtAssign(VGraphParser.StmtAssignContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code StmtInc}
 	 * labeled alternative in {@link VGraphParser#statement}.
@@ -141,6 +148,30 @@ public interface VGraphVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIncStmt(VGraphParser.IncStmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link VGraphParser#repiteStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRepiteStmt(VGraphParser.RepiteStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link VGraphParser#ejecutaStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEjecutaStmt(VGraphParser.EjecutaStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link VGraphParser#siStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSiStmt(VGraphParser.SiStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link VGraphParser#hazHastaStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHazHastaStmt(VGraphParser.HazHastaStmtContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link VGraphParser#hastaStmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -159,18 +190,6 @@ public interface VGraphVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMientrasStmt(VGraphParser.MientrasStmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link VGraphParser#repiteStmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitRepiteStmt(VGraphParser.RepiteStmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link VGraphParser#ejecutaStmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEjecutaStmt(VGraphParser.EjecutaStmtContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link VGraphParser#ordenList}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -183,133 +202,54 @@ public interface VGraphVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOrdenSinPuntoYComa(VGraphParser.OrdenSinPuntoYComaContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code MoveAvanzaSinPC}
-	 * labeled alternative in {@link VGraphParser#turtleMoveStmtSinPC}.
+	 * Visit a parse tree produced by the {@code SiSinPC}
+	 * labeled alternative in {@link VGraphParser#siSinPuntoYComa}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMoveAvanzaSinPC(VGraphParser.MoveAvanzaSinPCContext ctx);
+	T visitSiSinPC(VGraphParser.SiSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code MoveRetrocedeSinPC}
-	 * labeled alternative in {@link VGraphParser#turtleMoveStmtSinPC}.
+	 * Visit a parse tree produced by the {@code IncSinPC}
+	 * labeled alternative in {@link VGraphParser#incStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMoveRetrocedeSinPC(VGraphParser.MoveRetrocedeSinPCContext ctx);
+	T visitIncSinPC(VGraphParser.IncSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code TurnRightSinPC}
-	 * labeled alternative in {@link VGraphParser#turtleTurnStmtSinPC}.
+	 * Visit a parse tree produced by the {@code RepiteSinPC}
+	 * labeled alternative in {@link VGraphParser#repiteStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTurnRightSinPC(VGraphParser.TurnRightSinPCContext ctx);
+	T visitRepiteSinPC(VGraphParser.RepiteSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code TurnLeftSinPC}
-	 * labeled alternative in {@link VGraphParser#turtleTurnStmtSinPC}.
+	 * Visit a parse tree produced by the {@code MientrasSinPC}
+	 * labeled alternative in {@link VGraphParser#mientrasStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTurnLeftSinPC(VGraphParser.TurnLeftSinPCContext ctx);
+	T visitMientrasSinPC(VGraphParser.MientrasSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code StateHideSinPC}
-	 * labeled alternative in {@link VGraphParser#turtleStateStmtSinPC}.
+	 * Visit a parse tree produced by the {@code HastaSinPC}
+	 * labeled alternative in {@link VGraphParser#hastaStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStateHideSinPC(VGraphParser.StateHideSinPCContext ctx);
+	T visitHastaSinPC(VGraphParser.HastaSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code StateSetColorSinPC}
-	 * labeled alternative in {@link VGraphParser#turtleStateStmtSinPC}.
+	 * Visit a parse tree produced by the {@code HazMientrasSinPC}
+	 * labeled alternative in {@link VGraphParser#hazMientrasStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStateSetColorSinPC(VGraphParser.StateSetColorSinPCContext ctx);
+	T visitHazMientrasSinPC(VGraphParser.HazMientrasSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code StatePenDownSinPC}
-	 * labeled alternative in {@link VGraphParser#turtleStateStmtSinPC}.
+	 * Visit a parse tree produced by the {@code HazHastaSinPC}
+	 * labeled alternative in {@link VGraphParser#hazHastaStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStatePenDownSinPC(VGraphParser.StatePenDownSinPCContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code StatePenUpSinPC}
-	 * labeled alternative in {@link VGraphParser#turtleStateStmtSinPC}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStatePenUpSinPC(VGraphParser.StatePenUpSinPCContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code PosCenterSinPC}
-	 * labeled alternative in {@link VGraphParser#turtlePosStmtSinPC}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPosCenterSinPC(VGraphParser.PosCenterSinPCContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code PosSetXYBracketsSinPC}
-	 * labeled alternative in {@link VGraphParser#turtlePosStmtSinPC}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPosSetXYBracketsSinPC(VGraphParser.PosSetXYBracketsSinPCContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code PosSetXYNoBracketsSinPC}
-	 * labeled alternative in {@link VGraphParser#turtlePosStmtSinPC}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPosSetXYNoBracketsSinPC(VGraphParser.PosSetXYNoBracketsSinPCContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code PosSetHeadingSinPC}
-	 * labeled alternative in {@link VGraphParser#turtlePosStmtSinPC}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPosSetHeadingSinPC(VGraphParser.PosSetHeadingSinPCContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code PosSetXSinPC}
-	 * labeled alternative in {@link VGraphParser#turtlePosStmtSinPC}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPosSetXSinPC(VGraphParser.PosSetXSinPCContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code PosSetYSinPC}
-	 * labeled alternative in {@link VGraphParser#turtlePosStmtSinPC}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPosSetYSinPC(VGraphParser.PosSetYSinPCContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link VGraphParser#esperaStmtSinPC}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEsperaStmtSinPC(VGraphParser.EsperaStmtSinPCContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link VGraphParser#siStmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSiStmt(VGraphParser.SiStmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link VGraphParser#hazHastaStmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitHazHastaStmt(VGraphParser.HazHastaStmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link VGraphParser#siSinPuntoYComa}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSiSinPuntoYComa(VGraphParser.SiSinPuntoYComaContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link VGraphParser#incStmtSinPC}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIncStmtSinPC(VGraphParser.IncStmtSinPCContext ctx);
+	T visitHazHastaSinPC(VGraphParser.HazHastaSinPCContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code MoveAvanza}
 	 * labeled alternative in {@link VGraphParser#turtleMoveStmt}.
@@ -409,87 +349,122 @@ public interface VGraphVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPosSetY(VGraphParser.PosSetYContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link VGraphParser#colorName}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitColorName(VGraphParser.ColorNameContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link VGraphParser#esperaStmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitEsperaStmt(VGraphParser.EsperaStmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link VGraphParser#type}.
+	 * Visit a parse tree produced by the {@code MoveAvanzaSinPC}
+	 * labeled alternative in {@link VGraphParser#turtleMoveStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitType(VGraphParser.TypeContext ctx);
+	T visitMoveAvanzaSinPC(VGraphParser.MoveAvanzaSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code DrawLine}
-	 * labeled alternative in {@link VGraphParser#drawStmt}.
+	 * Visit a parse tree produced by the {@code MoveRetrocedeSinPC}
+	 * labeled alternative in {@link VGraphParser#turtleMoveStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDrawLine(VGraphParser.DrawLineContext ctx);
+	T visitMoveRetrocedeSinPC(VGraphParser.MoveRetrocedeSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code DrawRect}
-	 * labeled alternative in {@link VGraphParser#drawStmt}.
+	 * Visit a parse tree produced by the {@code TurnRightSinPC}
+	 * labeled alternative in {@link VGraphParser#turtleTurnStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDrawRect(VGraphParser.DrawRectContext ctx);
+	T visitTurnRightSinPC(VGraphParser.TurnRightSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code DrawCircle}
-	 * labeled alternative in {@link VGraphParser#drawStmt}.
+	 * Visit a parse tree produced by the {@code TurnLeftSinPC}
+	 * labeled alternative in {@link VGraphParser#turtleTurnStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDrawCircle(VGraphParser.DrawCircleContext ctx);
+	T visitTurnLeftSinPC(VGraphParser.TurnLeftSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code DrawPixel}
-	 * labeled alternative in {@link VGraphParser#drawStmt}.
+	 * Visit a parse tree produced by the {@code StateHideSinPC}
+	 * labeled alternative in {@link VGraphParser#turtleStateStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDrawPixel(VGraphParser.DrawPixelContext ctx);
+	T visitStateHideSinPC(VGraphParser.StateHideSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link VGraphParser#setcolorStmt}.
+	 * Visit a parse tree produced by the {@code StateSetColorSinPC}
+	 * labeled alternative in {@link VGraphParser#turtleStateStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSetcolorStmt(VGraphParser.SetcolorStmtContext ctx);
+	T visitStateSetColorSinPC(VGraphParser.StateSetColorSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link VGraphParser#frameStmt}.
+	 * Visit a parse tree produced by the {@code StatePenDownSinPC}
+	 * labeled alternative in {@link VGraphParser#turtleStateStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFrameStmt(VGraphParser.FrameStmtContext ctx);
+	T visitStatePenDownSinPC(VGraphParser.StatePenDownSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link VGraphParser#loopStmt}.
+	 * Visit a parse tree produced by the {@code StatePenUpSinPC}
+	 * labeled alternative in {@link VGraphParser#turtleStateStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLoopStmt(VGraphParser.LoopStmtContext ctx);
+	T visitStatePenUpSinPC(VGraphParser.StatePenUpSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link VGraphParser#ifStmt}.
+	 * Visit a parse tree produced by the {@code PosCenterSinPC}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIfStmt(VGraphParser.IfStmtContext ctx);
+	T visitPosCenterSinPC(VGraphParser.PosCenterSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link VGraphParser#waitStmt}.
+	 * Visit a parse tree produced by the {@code PosSetXYBracketsSinPC}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWaitStmt(VGraphParser.WaitStmtContext ctx);
+	T visitPosSetXYBracketsSinPC(VGraphParser.PosSetXYBracketsSinPCContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link VGraphParser#assignment}.
+	 * Visit a parse tree produced by the {@code PosSetXYNoBracketsSinPC}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmtSinPC}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAssignment(VGraphParser.AssignmentContext ctx);
+	T visitPosSetXYNoBracketsSinPC(VGraphParser.PosSetXYNoBracketsSinPCContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PosSetHeadingSinPC}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmtSinPC}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPosSetHeadingSinPC(VGraphParser.PosSetHeadingSinPCContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PosSetXSinPC}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmtSinPC}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPosSetXSinPC(VGraphParser.PosSetXSinPCContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PosSetYSinPC}
+	 * labeled alternative in {@link VGraphParser#turtlePosStmtSinPC}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPosSetYSinPC(VGraphParser.PosSetYSinPCContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code EsperaSinPC}
+	 * labeled alternative in {@link VGraphParser#esperaStmtSinPC}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEsperaSinPC(VGraphParser.EsperaSinPCContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link VGraphParser#colorName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitColorName(VGraphParser.ColorNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link VGraphParser#condition}.
 	 * @param ctx the parse tree
@@ -553,6 +528,13 @@ public interface VGraphVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOLogico(VGraphParser.OLogicoContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code CompExpr}
+	 * labeled alternative in {@link VGraphParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCompExpr(VGraphParser.CompExprContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code YLogico}
 	 * labeled alternative in {@link VGraphParser#expr}.
 	 * @param ctx the parse tree
@@ -588,6 +570,13 @@ public interface VGraphVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExprRumbo(VGraphParser.ExprRumboContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code Mayorque}
+	 * labeled alternative in {@link VGraphParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMayorque(VGraphParser.MayorqueContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code Division}
 	 * labeled alternative in {@link VGraphParser#expr}.
 	 * @param ctx the parse tree
@@ -602,13 +591,6 @@ public interface VGraphVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIntLiteral(VGraphParser.IntLiteralContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code MayorQue}
-	 * labeled alternative in {@link VGraphParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMayorQue(VGraphParser.MayorQueContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code Potencia}
 	 * labeled alternative in {@link VGraphParser#expr}.
 	 * @param ctx the parse tree
@@ -616,10 +598,10 @@ public interface VGraphVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPotencia(VGraphParser.PotenciaContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code MenorQue}
+	 * Visit a parse tree produced by the {@code Menorque}
 	 * labeled alternative in {@link VGraphParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMenorQue(VGraphParser.MenorQueContext ctx);
+	T visitMenorque(VGraphParser.MenorqueContext ctx);
 }

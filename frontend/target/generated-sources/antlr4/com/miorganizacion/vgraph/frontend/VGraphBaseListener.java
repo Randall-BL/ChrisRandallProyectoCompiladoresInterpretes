@@ -41,6 +41,18 @@ public class VGraphBaseListener implements VGraphListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterStmtAssign(VGraphParser.StmtAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStmtAssign(VGraphParser.StmtAssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterStmtInc(VGraphParser.StmtIncContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -245,6 +257,54 @@ public class VGraphBaseListener implements VGraphListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterRepiteStmt(VGraphParser.RepiteStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRepiteStmt(VGraphParser.RepiteStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEjecutaStmt(VGraphParser.EjecutaStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEjecutaStmt(VGraphParser.EjecutaStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSiStmt(VGraphParser.SiStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSiStmt(VGraphParser.SiStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterHazHastaStmt(VGraphParser.HazHastaStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitHazHastaStmt(VGraphParser.HazHastaStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterHastaStmt(VGraphParser.HastaStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -281,30 +341,6 @@ public class VGraphBaseListener implements VGraphListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRepiteStmt(VGraphParser.RepiteStmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitRepiteStmt(VGraphParser.RepiteStmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterEjecutaStmt(VGraphParser.EjecutaStmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitEjecutaStmt(VGraphParser.EjecutaStmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterOrdenList(VGraphParser.OrdenListContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -329,229 +365,85 @@ public class VGraphBaseListener implements VGraphListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMoveAvanzaSinPC(VGraphParser.MoveAvanzaSinPCContext ctx) { }
+	@Override public void enterSiSinPC(VGraphParser.SiSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMoveAvanzaSinPC(VGraphParser.MoveAvanzaSinPCContext ctx) { }
+	@Override public void exitSiSinPC(VGraphParser.SiSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMoveRetrocedeSinPC(VGraphParser.MoveRetrocedeSinPCContext ctx) { }
+	@Override public void enterIncSinPC(VGraphParser.IncSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMoveRetrocedeSinPC(VGraphParser.MoveRetrocedeSinPCContext ctx) { }
+	@Override public void exitIncSinPC(VGraphParser.IncSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTurnRightSinPC(VGraphParser.TurnRightSinPCContext ctx) { }
+	@Override public void enterRepiteSinPC(VGraphParser.RepiteSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTurnRightSinPC(VGraphParser.TurnRightSinPCContext ctx) { }
+	@Override public void exitRepiteSinPC(VGraphParser.RepiteSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTurnLeftSinPC(VGraphParser.TurnLeftSinPCContext ctx) { }
+	@Override public void enterMientrasSinPC(VGraphParser.MientrasSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTurnLeftSinPC(VGraphParser.TurnLeftSinPCContext ctx) { }
+	@Override public void exitMientrasSinPC(VGraphParser.MientrasSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStateHideSinPC(VGraphParser.StateHideSinPCContext ctx) { }
+	@Override public void enterHastaSinPC(VGraphParser.HastaSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStateHideSinPC(VGraphParser.StateHideSinPCContext ctx) { }
+	@Override public void exitHastaSinPC(VGraphParser.HastaSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStateSetColorSinPC(VGraphParser.StateSetColorSinPCContext ctx) { }
+	@Override public void enterHazMientrasSinPC(VGraphParser.HazMientrasSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStateSetColorSinPC(VGraphParser.StateSetColorSinPCContext ctx) { }
+	@Override public void exitHazMientrasSinPC(VGraphParser.HazMientrasSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStatePenDownSinPC(VGraphParser.StatePenDownSinPCContext ctx) { }
+	@Override public void enterHazHastaSinPC(VGraphParser.HazHastaSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStatePenDownSinPC(VGraphParser.StatePenDownSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterStatePenUpSinPC(VGraphParser.StatePenUpSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitStatePenUpSinPC(VGraphParser.StatePenUpSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPosCenterSinPC(VGraphParser.PosCenterSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPosCenterSinPC(VGraphParser.PosCenterSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPosSetXYBracketsSinPC(VGraphParser.PosSetXYBracketsSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPosSetXYBracketsSinPC(VGraphParser.PosSetXYBracketsSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPosSetXYNoBracketsSinPC(VGraphParser.PosSetXYNoBracketsSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPosSetXYNoBracketsSinPC(VGraphParser.PosSetXYNoBracketsSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPosSetHeadingSinPC(VGraphParser.PosSetHeadingSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPosSetHeadingSinPC(VGraphParser.PosSetHeadingSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPosSetXSinPC(VGraphParser.PosSetXSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPosSetXSinPC(VGraphParser.PosSetXSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPosSetYSinPC(VGraphParser.PosSetYSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPosSetYSinPC(VGraphParser.PosSetYSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterEsperaStmtSinPC(VGraphParser.EsperaStmtSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitEsperaStmtSinPC(VGraphParser.EsperaStmtSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSiStmt(VGraphParser.SiStmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSiStmt(VGraphParser.SiStmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterHazHastaStmt(VGraphParser.HazHastaStmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitHazHastaStmt(VGraphParser.HazHastaStmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSiSinPuntoYComa(VGraphParser.SiSinPuntoYComaContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSiSinPuntoYComa(VGraphParser.SiSinPuntoYComaContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterIncStmtSinPC(VGraphParser.IncStmtSinPCContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIncStmtSinPC(VGraphParser.IncStmtSinPCContext ctx) { }
+	@Override public void exitHazHastaSinPC(VGraphParser.HazHastaSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -725,18 +617,6 @@ public class VGraphBaseListener implements VGraphListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterColorName(VGraphParser.ColorNameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitColorName(VGraphParser.ColorNameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterEsperaStmt(VGraphParser.EsperaStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -749,133 +629,193 @@ public class VGraphBaseListener implements VGraphListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterType(VGraphParser.TypeContext ctx) { }
+	@Override public void enterMoveAvanzaSinPC(VGraphParser.MoveAvanzaSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitType(VGraphParser.TypeContext ctx) { }
+	@Override public void exitMoveAvanzaSinPC(VGraphParser.MoveAvanzaSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDrawLine(VGraphParser.DrawLineContext ctx) { }
+	@Override public void enterMoveRetrocedeSinPC(VGraphParser.MoveRetrocedeSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDrawLine(VGraphParser.DrawLineContext ctx) { }
+	@Override public void exitMoveRetrocedeSinPC(VGraphParser.MoveRetrocedeSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDrawRect(VGraphParser.DrawRectContext ctx) { }
+	@Override public void enterTurnRightSinPC(VGraphParser.TurnRightSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDrawRect(VGraphParser.DrawRectContext ctx) { }
+	@Override public void exitTurnRightSinPC(VGraphParser.TurnRightSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDrawCircle(VGraphParser.DrawCircleContext ctx) { }
+	@Override public void enterTurnLeftSinPC(VGraphParser.TurnLeftSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDrawCircle(VGraphParser.DrawCircleContext ctx) { }
+	@Override public void exitTurnLeftSinPC(VGraphParser.TurnLeftSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDrawPixel(VGraphParser.DrawPixelContext ctx) { }
+	@Override public void enterStateHideSinPC(VGraphParser.StateHideSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDrawPixel(VGraphParser.DrawPixelContext ctx) { }
+	@Override public void exitStateHideSinPC(VGraphParser.StateHideSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSetcolorStmt(VGraphParser.SetcolorStmtContext ctx) { }
+	@Override public void enterStateSetColorSinPC(VGraphParser.StateSetColorSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSetcolorStmt(VGraphParser.SetcolorStmtContext ctx) { }
+	@Override public void exitStateSetColorSinPC(VGraphParser.StateSetColorSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFrameStmt(VGraphParser.FrameStmtContext ctx) { }
+	@Override public void enterStatePenDownSinPC(VGraphParser.StatePenDownSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFrameStmt(VGraphParser.FrameStmtContext ctx) { }
+	@Override public void exitStatePenDownSinPC(VGraphParser.StatePenDownSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLoopStmt(VGraphParser.LoopStmtContext ctx) { }
+	@Override public void enterStatePenUpSinPC(VGraphParser.StatePenUpSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLoopStmt(VGraphParser.LoopStmtContext ctx) { }
+	@Override public void exitStatePenUpSinPC(VGraphParser.StatePenUpSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIfStmt(VGraphParser.IfStmtContext ctx) { }
+	@Override public void enterPosCenterSinPC(VGraphParser.PosCenterSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIfStmt(VGraphParser.IfStmtContext ctx) { }
+	@Override public void exitPosCenterSinPC(VGraphParser.PosCenterSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterWaitStmt(VGraphParser.WaitStmtContext ctx) { }
+	@Override public void enterPosSetXYBracketsSinPC(VGraphParser.PosSetXYBracketsSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitWaitStmt(VGraphParser.WaitStmtContext ctx) { }
+	@Override public void exitPosSetXYBracketsSinPC(VGraphParser.PosSetXYBracketsSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignment(VGraphParser.AssignmentContext ctx) { }
+	@Override public void enterPosSetXYNoBracketsSinPC(VGraphParser.PosSetXYNoBracketsSinPCContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignment(VGraphParser.AssignmentContext ctx) { }
+	@Override public void exitPosSetXYNoBracketsSinPC(VGraphParser.PosSetXYNoBracketsSinPCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPosSetHeadingSinPC(VGraphParser.PosSetHeadingSinPCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPosSetHeadingSinPC(VGraphParser.PosSetHeadingSinPCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPosSetXSinPC(VGraphParser.PosSetXSinPCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPosSetXSinPC(VGraphParser.PosSetXSinPCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPosSetYSinPC(VGraphParser.PosSetYSinPCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPosSetYSinPC(VGraphParser.PosSetYSinPCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEsperaSinPC(VGraphParser.EsperaSinPCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEsperaSinPC(VGraphParser.EsperaSinPCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterColorName(VGraphParser.ColorNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitColorName(VGraphParser.ColorNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -989,6 +929,18 @@ public class VGraphBaseListener implements VGraphListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCompExpr(VGraphParser.CompExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCompExpr(VGraphParser.CompExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterYLogico(VGraphParser.YLogicoContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1049,6 +1001,18 @@ public class VGraphBaseListener implements VGraphListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMayorque(VGraphParser.MayorqueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMayorque(VGraphParser.MayorqueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDivision(VGraphParser.DivisionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1073,18 +1037,6 @@ public class VGraphBaseListener implements VGraphListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMayorQue(VGraphParser.MayorQueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMayorQue(VGraphParser.MayorQueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterPotencia(VGraphParser.PotenciaContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1097,13 +1049,13 @@ public class VGraphBaseListener implements VGraphListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMenorQue(VGraphParser.MenorQueContext ctx) { }
+	@Override public void enterMenorque(VGraphParser.MenorqueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMenorQue(VGraphParser.MenorQueContext ctx) { }
+	@Override public void exitMenorque(VGraphParser.MenorqueContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
