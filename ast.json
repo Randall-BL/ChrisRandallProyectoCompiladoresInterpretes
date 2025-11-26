@@ -1,258 +1,96 @@
 {
   "type" : "Program",
   "statements" : [ {
-    "type" : "Haz",
-    "identifier" : "puntas",
-    "expression" : {
-      "type" : "IntLiteral",
-      "value" : 5
-    },
-    "line" : 1,
-    "column" : 0
-  }, {
-    "type" : "Haz",
-    "identifier" : "lado",
-    "expression" : {
-      "type" : "IntLiteral",
-      "value" : 120
-    },
-    "line" : 2,
-    "column" : 0
-  }, {
-    "type" : "Haz",
-    "identifier" : "rotacion",
-    "expression" : {
-      "type" : "IntLiteral",
-      "value" : 144
-    },
+    "type" : "BajaLapiz",
     "line" : 3,
     "column" : 0
   }, {
-    "type" : "Haz",
-    "identifier" : "estrellas",
-    "expression" : {
-      "type" : "IntLiteral",
-      "value" : 20
-    },
-    "line" : 5,
-    "column" : 0
-  }, {
-    "type" : "Haz",
-    "identifier" : "angulo",
-    "expression" : {
-      "type" : "IntLiteral",
-      "value" : 360
-    },
+    "type" : "PonColorLapiz",
     "line" : 6,
-    "column" : 0
+    "column" : 0,
+    "colorName" : "Azul"
   }, {
-    "type" : "Haz",
-    "identifier" : "angulo2",
-    "expression" : {
-      "type" : "Division",
-      "dividendo" : {
-        "type" : "VarRef",
-        "varName" : "angulo"
-      },
-      "divisor" : {
-        "type" : "VarRef",
-        "varName" : "estrellas"
-      }
-    },
-    "line" : 8,
-    "column" : 0
-  }, {
-    "type" : "Haz",
-    "identifier" : "i",
-    "expression" : {
+    "type" : "Avanza",
+    "distance" : {
       "type" : "IntLiteral",
-      "value" : 0
+      "value" : 50
     },
-    "line" : 10,
+    "line" : 7,
     "column" : 0
   }, {
-    "type" : "BajaLapiz",
+    "type" : "GiraDerecha",
+    "line" : 8,
+    "column" : 0,
+    "angle" : {
+      "type" : "IntLiteral",
+      "value" : 90
+    }
+  }, {
+    "type" : "PonColorLapiz",
+    "line" : 11,
+    "column" : 0,
+    "colorName" : "Amarillo"
+  }, {
+    "type" : "Avanza",
+    "distance" : {
+      "type" : "IntLiteral",
+      "value" : 50
+    },
     "line" : 12,
     "column" : 0
   }, {
-    "type" : "PonColorLapiz",
+    "type" : "GiraDerecha",
     "line" : 13,
     "column" : 0,
-    "colorName" : "Verde"
+    "angle" : {
+      "type" : "IntLiteral",
+      "value" : 90
+    }
   }, {
-    "type" : "Mientras",
-    "condicion" : {
-      "type" : "Condition",
-      "left" : {
-        "type" : "VarRef",
-        "varName" : "i"
-      },
-      "operator" : "<",
-      "right" : {
-        "type" : "VarRef",
-        "varName" : "estrellas"
-      }
+    "type" : "PonColorLapiz",
+    "line" : 16,
+    "column" : 0,
+    "colorName" : "Negro"
+  }, {
+    "type" : "Avanza",
+    "distance" : {
+      "type" : "IntLiteral",
+      "value" : 50
     },
-    "instrucciones" : [ {
-      "type" : "Repite",
-      "veces" : {
-        "type" : "VarRef",
-        "varName" : "puntas"
-      },
-      "ordenes" : [ {
-        "type" : "Avanza",
-        "distance" : {
-          "type" : "VarRef",
-          "varName" : "lado"
-        },
-        "line" : 18,
-        "column" : 8
-      }, {
-        "type" : "GiraDerecha",
-        "line" : 19,
-        "column" : 8,
-        "angle" : {
-          "type" : "VarRef",
-          "varName" : "rotacion"
-        }
-      } ]
-    }, {
-      "type" : "GiraDerecha",
-      "line" : 23,
-      "column" : 4,
-      "angle" : {
-        "type" : "VarRef",
-        "varName" : "angulo2"
-      }
-    }, {
-      "type" : "Si",
-      "condicion" : {
-        "type" : "Condition",
-        "left" : {
-          "type" : "BinaryOp",
-          "operator" : "%",
-          "left" : {
-            "type" : "VarRef",
-            "varName" : "i"
-          },
-          "right" : {
-            "type" : "IntLiteral",
-            "value" : 4
-          }
-        },
-        "operator" : "==",
-        "right" : {
-          "type" : "IntLiteral",
-          "value" : 0
-        }
-      },
-      "instruccionesSi" : [ {
-        "type" : "PonColorLapiz",
-        "line" : 27,
-        "column" : 25,
-        "colorName" : "Azul"
-      } ]
-    }, {
-      "type" : "Si",
-      "condicion" : {
-        "type" : "Condition",
-        "left" : {
-          "type" : "BinaryOp",
-          "operator" : "%",
-          "left" : {
-            "type" : "VarRef",
-            "varName" : "i"
-          },
-          "right" : {
-            "type" : "IntLiteral",
-            "value" : 4
-          }
-        },
-        "operator" : "==",
-        "right" : {
-          "type" : "IntLiteral",
-          "value" : 1
-        }
-      },
-      "instruccionesSi" : [ {
-        "type" : "PonColorLapiz",
-        "line" : 28,
-        "column" : 24,
-        "colorName" : "Rojo"
-      } ]
-    }, {
-      "type" : "Si",
-      "condicion" : {
-        "type" : "Condition",
-        "left" : {
-          "type" : "BinaryOp",
-          "operator" : "%",
-          "left" : {
-            "type" : "VarRef",
-            "varName" : "i"
-          },
-          "right" : {
-            "type" : "IntLiteral",
-            "value" : 4
-          }
-        },
-        "operator" : "==",
-        "right" : {
-          "type" : "IntLiteral",
-          "value" : 2
-        }
-      },
-      "instruccionesSi" : [ {
-        "type" : "PonColorLapiz",
-        "line" : 29,
-        "column" : 24,
-        "colorName" : "Amarillo"
-      } ]
-    }, {
-      "type" : "Si",
-      "condicion" : {
-        "type" : "Condition",
-        "left" : {
-          "type" : "BinaryOp",
-          "operator" : "%",
-          "left" : {
-            "type" : "VarRef",
-            "varName" : "i"
-          },
-          "right" : {
-            "type" : "IntLiteral",
-            "value" : 4
-          }
-        },
-        "operator" : "==",
-        "right" : {
-          "type" : "IntLiteral",
-          "value" : 3
-        }
-      },
-      "instruccionesSi" : [ {
-        "type" : "PonColorLapiz",
-        "line" : 30,
-        "column" : 24,
-        "colorName" : "Verde"
-      } ]
-    }, {
-      "type" : "Increment",
-      "identifier" : "i",
-      "byValue" : {
-        "type" : "IntLiteral",
-        "value" : 1
-      },
-      "line" : 32,
-      "column" : 4
-    } ]
-  }, {
-    "type" : "SubeLapiz",
-    "line" : 35,
+    "line" : 17,
     "column" : 0
   }, {
-    "type" : "Centro",
-    "line" : 36,
+    "type" : "GiraDerecha",
+    "line" : 18,
+    "column" : 0,
+    "angle" : {
+      "type" : "IntLiteral",
+      "value" : 90
+    }
+  }, {
+    "type" : "PonColorLapiz",
+    "line" : 21,
+    "column" : 0,
+    "colorName" : "Azul"
+  }, {
+    "type" : "Avanza",
+    "distance" : {
+      "type" : "IntLiteral",
+      "value" : 50
+    },
+    "line" : 22,
+    "column" : 0
+  }, {
+    "type" : "GiraDerecha",
+    "line" : 23,
+    "column" : 0,
+    "angle" : {
+      "type" : "IntLiteral",
+      "value" : 90
+    }
+  }, {
+    "type" : "SubeLapiz",
+    "line" : 25,
     "column" : 0
   } ]
 }
